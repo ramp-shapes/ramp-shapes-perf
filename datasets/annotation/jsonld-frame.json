@@ -1,0 +1,8 @@
+{
+  "@context": "https://www.w3.org/ns/anno.jsonld",
+  "@type": "Annotation",
+  "target": {
+    "source": {"@embed": "@always"},
+    "selector": {}
+  }
+}

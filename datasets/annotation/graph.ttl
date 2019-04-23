@@ -1,0 +1,26 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix oa: <http://www.w3.org/ns/oa#>.
+
+<example:annotation1> oa:hasBody <example:annotation-body1>;
+    oa:hasTarget <example:range-source1>;
+    a oa:Annotation.
+<example:annotation-body1> rdfs:label "Borders"@en, "Границы"@ru.
+<example:offset1> oa:end "9"^^xsd:nonNegativeInteger;
+    oa:start "9"^^xsd:nonNegativeInteger;
+    a oa:TextPositionSelector.
+<example:offset2> oa:end "34"^^xsd:nonNegativeInteger;
+    oa:start "34"^^xsd:nonNegativeInteger;
+    a oa:TextPositionSelector.
+<example:range-source1> oa:hasSelector <example:range1>;
+    oa:hasSource <example:document1>.
+<example:range1> oa:hasEndSelector <example:xpath2>;
+    oa:hasStartSelector <example:xpath1>;
+    a oa:RangeSelector.
+<example:xpath1> oa:refinedBy <example:offset1>;
+    a oa:XPathSelector;
+    rdf:value "/table[1]/tbody[1]/tr[4]/td[1]".
+<example:xpath2> oa:refinedBy <example:offset2>;
+    a oa:XPathSelector;
+    rdf:value "/table[1]/tbody[1]/tr[4]/td[1]".
