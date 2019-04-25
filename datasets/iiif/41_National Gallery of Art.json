@@ -1,0 +1,65 @@
+{
+    "@id": "https://media.nga.gov/public/manifests/multispectral_demo.json",
+    "@type": "sc:Manifest",
+    "description": "Demonstration of Mirador using oa:choice for multispectral overlays.",
+    "label": "Girl with the Red Hat (1937.1.53)",
+    "logo": "https://www.nga.gov/content/dam/ngaweb/imgs/NGAEB.jpg",
+    "attribution": "Vermeer, Johannes (Andrew W. Mellon Collection)",
+    "sequences": [{
+        "@id": "https://media.nga.gov/public/manifests/choice.json/sequence/1",
+        "@type": "sc:Sequence",
+        "canvases": [
+            {
+                "@id": "https://media.nga.gov/public/manifests/multispectral_demo.json/canvas/1",
+                "@type": "sc:Canvas",
+                "height": 4477,
+                "label": "Girl with the Red Hat",
+                "width": 3451,
+                "images": [{
+                    "@id": "https://media.nga.gov/2309234234",
+                    "@type": "oa:Annotation",
+                    "motivation": "sc:painting",
+                    "on": "https://media.nga.gov/public/manifests/multispectral_demo.json/canvas/1",
+                    "resource": {
+                        "@id":"https://media.nga.gov/iiif/public/research/dutch_paintings_17th_century/objects/6/0/60-primary-0-nativeres.ptif",
+                        "@type": "oa:Choice",
+                        "default": {
+                            "@id":"https://media.nga.gov/iiif/public/research/dutch_paintings_17th_century/objects/6/0/60-technical-4.0-nativeres.ptif/full/full/0/default.jpg",
+                            "@type": "dctypes:Image",
+                            "format": "image/jpeg",
+                            "service":{
+                                "@context":"https://iiif.io/api/image/2/context.json",
+                                "@id":"https://media.nga.gov/iiif/public/research/dutch_paintings_17th_century/objects/6/0/60-technical-4.0-nativeres.ptif",
+                                "profile":"https://iiif.io/api/image/2/level2.json"
+                            },
+                            "label": "Girl with the Red Hat"
+                        },
+                        "item": [
+                            {
+                                "@id":"https://media.nga.gov/iiif/public/research/dutch_paintings_17th_century/objects/6/0/60-technical-4.1-nativeres.ptif",
+                                "@type": "dctypes:Image",
+                                "format": "image/jpeg",
+                                "service":{
+                                    "@context":"https://iiif.io/api/image/2/context.json",
+                                    "@id":"https://media.nga.gov/iiif/public/research/dutch_paintings_17th_century/objects/6/0/60-technical-4.1-nativeres.ptif",
+                                    "profile":"https://iiif.io/api/image/2/level2.json"
+                                },
+                                "label": "X Radiograph Composite: Girl with the Red Hat"
+                            },
+                            {
+                                "@id":"https://media.nga.gov/iiif/public/research/dutch_paintings_17th_century/objects/6/0/60-technical-4.2-nativeres.ptif",
+                                "@type": "dctypes:Image",
+                                "format": "image/jpeg",
+                                "service":{
+                                    "@context":"https://iiif.io/api/image/2/context.json",
+                                    "@id":"https://media.nga.gov/iiif/public/research/dutch_paintings_17th_century/objects/6/0/60-technical-4.2-nativeres.ptif",
+                                    "profile":"https://iiif.io/api/image/2/level2.json"
+                                },
+                                "label": "Infrared reflectogram: Girl with the Red Hat"
+                            }
+                    ]
+                }
+            }]
+        }]
+    }]
+}

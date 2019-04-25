@@ -30,7 +30,7 @@ export function makeDocumentLoader(options: LoaderOptions): JsonLd.DocumentLoade
     if (options.fetchRemoteContexts) {
       return NODE_DOCUMENT_LOADER(url, callback);
     } else {
-      callback(new Error(`Fetching remote JSON-LD contexts is not allowed`), null);
+      callback(new Error(`Fetching remote JSON-LD contexts is not allowed: ${url}`), null);
     }
   };
 }
@@ -50,7 +50,7 @@ export function frame(
   input: object | string,
   frame: object,
   options: JsonLd.FrameOptions & { documentLoader: JsonLd.DocumentLoader }
-): Promise<any> {
+): Promise<object> {
   return new Promise((resolve, reject) =>
     JsonLd.frame(input, frame, options,
       (error, result) => error ? reject(error) : resolve(result))
@@ -61,7 +61,7 @@ export function flatten(
   input: object,
   ctx: object | string,
   options: JsonLd.FlattenOptions & { documentLoader: JsonLd.DocumentLoader }
-): Promise<any> {
+): Promise<object> {
   return new Promise<any>((resolve, reject) =>
     JsonLd.flatten(input, ctx, options,
       (error, result) => error ? reject(error) : resolve(result))
@@ -71,9 +71,19 @@ export function flatten(
 export function fromRdf(
   dataset: object | string,
   options: JsonLd.FromRdfOptions & { documentLoader: JsonLd.DocumentLoader }
-): Promise<any> {
+): Promise<object> {
   return new Promise((resolve, reject) =>
     JsonLd.fromRDF(dataset, options,
+      (error, result) => error ? reject(error) : resolve(result))
+  );
+}
+
+export function toRdf(
+  input: object,
+  options: JsonLd.ToRdfOptions & { documentLoader: JsonLd.DocumentLoader }
+): Promise<any[]> {
+  return new Promise((resolve, reject) =>
+    JsonLd.toRDF(input, options,
       (error, result) => error ? reject(error) : resolve(result))
   );
 }

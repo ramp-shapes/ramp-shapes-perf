@@ -1,0 +1,271 @@
+{
+  "@type" : "sc:Manifest",
+  "@context" : "http://iiif.io/api/presentation/2/context.json",
+  "@id" : "https://manifests.britishart.yale.edu/manifest/5005",
+  "label" : "Sir Joshua Reynolds RA, 1723–1792, British, Mrs. Abington as Miss Prue in \"Love for Love\" by William Congreve, 1771, Oil on canvas, Yale Center for British Art, B1977.14.67, Paintings and Sculpture",
+  "description" : "Mrs. Abington as Miss Prue in William Congreve's \"Love for Love\", [ Portrait ] of a Lady (three Quarters), Support (PTG): 30 1/4 x 25 1/8 inches (76.8 x 63.8 cm)",
+  "attribution" : "<span>Yale Center for British Art, Paul Mellon Collection,<br/>Public Domain</span>",
+  "metadata" : [ {
+    "label" : "Creator(s)",
+    "value" : [ "Sir Joshua Reynolds RA, 1723–1792, British" ]
+  }, {
+    "label" : "Titles",
+    "value" : [ "<span>Mrs. Abington as Miss Prue in \"Love for Love\" by William Congreve</span>" ]
+  }, {
+    "label" : "Date",
+    "value" : [ "1771" ]
+  }, {
+    "label" : "Medium",
+    "value" : [ "<span>Oil on canvas</span>" ]
+  }, {
+    "label" : "Dimensions",
+    "value" : [ "Support (PTG): 30 1/4 x 25 1/8 inches (76.8 x 63.8 cm)" ]
+  }, {
+    "label" : "Credit line",
+    "value" : [ "Yale Center for British Art, Paul Mellon Collection" ]
+  }, {
+    "label" : "Institution",
+    "value" : [ "Yale Center for British Art" ]
+  }, {
+    "label" : "Collection",
+    "value" : [ "Paintings and Sculpture" ]
+  }, {
+    "label" : "Accession number",
+    "value" : [ "B1977.14.67" ]
+  }, {
+    "label" : "Bibliography",
+    "value" : [ "<span>Julia Marciari-Alexander, <i>This other Eden, paintings from the Yale Center for British Art, </i>Yale Center for British Art, New Haven, CT, 1998, pp. 98-99, no. 35, ND1314.3 Y36 1998 (YCBA)</span>", "<span>John Baskett, <i>Paul Mellon's legacy, a passion for British art : masterpieces from the Yale Center for British Art, </i>Yale Center for British Art, New Haven, CT, 2007, pp. 28, 255, no. 31, N5220 M552 P38 2007 OVERSIZE (YCBA)</span>", "<span>Lindsay Rothwell, <i>Paul Mellon's legacy, an American's passion for British art : Sackler Wing of Galleries, 20 October 2007 - 27 January 2008 : an introduction to the exhibition for teachers and students., </i>Royal Academy of Arts, London, UK, 2007, pp. 18-20, no. 31, V 2038 (YCBA)</span>", "<span><i>Paul Mellon's legacy, a passion for British art. [large print labels], </i>Yale Center for British Art, New Haven, CT, 2007, v. 3, N5220 M552 +P381 2007, Mellon Shelf (YCBA)</span>", "<span>Malcolm Warner, <i>Great British paintings from American collections, Holbein to Hockney, </i>Yale Center for British Art, New Haven, CT, 2001, pp. 119-21, no. 29, ND464 W27 2001 (YCBA)</span>", "<span>Malcolm Cormack, <i>A concise catalogue of paintings in the Yale Center for British Art, </i>Yale Center for British Art, New Haven, CT, 1985, pp. 184, 185, N590.2 A83 (YCBA)</span>", "<span>Andrew Graham-Dixon, <i>A history of British art, </i>BBC, London, UK, 1996, pp. 107-8, no. 38, N6761 G72 1996 (YCBA)</span>", "<span>David Mannings, <i>Sir Joshua Reynolds, a complete catalogue of his paintings, </i>Yale University Press, New Haven, 2000, v. 1, p. 55-56; v. 2, pp. 67, 417, no. 29, pl. 67, fig.1017, NJ18 R36 A12 M35 2000 OVERSIZE (YCBA)</span>", "<span>Aileen Ribeiro, <i>The art of dress, fashion in England and France 1750 to 1820, </i>Yale University Press, New Haven, CT, 1995, p.65, , pl. 67, GT736 R53 1995 (YCBA)</span>", "<span>Ellis Waterhouse, <i>Reynolds, </i>Kegan Paul, Trench Trübner, London, 1941, p. 61, pl. 136, NJ18 R36 W37 (YCBA)</span>", "<span>Algernon Graves, <i>A history of the works of Sir Joshua Reynolds, P.R.A., </i>Henry Graves & Co., London, UK, 1899, p. 4, NJ18 R36 G73 OVERSIZE (YCBA) , Also available on Microfiche: Fiche B6 (YCBA)</span>", "<span>Kinda Kalof, <i>A cultural history of animals, </i>Berg, Oxford, UK; New York, NY, 2007, p. 183 (v. 4), fig. 7.14, QL85 C85 2007 (YCBA)</span>", "<span>Angela Rosenthal, <i>Angelica Kauffman, art and sensibility, </i>Yale University Press, New Haven, 2006, p. 70, no. 32, NJ18 K218 R67 2006 + (YCBA)</span>", "<span>Martin Postle, <i>Joshua Reynolds, the creation of celebrity, </i>Tate Publishing, London New York, 2005, p. 190, no. 54, NJ18 R36 J68 2005 + (YCBA)</span>", "<span>Desmond Shawe-Taylor, <i>The Georgians, eighteenth-century portraiture & society, </i>Barrie & Jenkins, London, 1990, p. 110, fig. 72, ND1314.4 S52 1990 (YCBA)</span>", "<span>Gillen D'Arcy Wood, <i>The shock of the real, romanticism and visual culture, 1760-1860, </i>Palgrave Macmillan, New York, N.Y., 2001, pp. 63-66, fig. 1.7, NX452.5 R64 W66 2001 (YCBA)</span>", "<span><i>Reynolds, </i>Royal Academy of Arts, London, 1986, pp. 123, 246-47, no. 78, NJ18 R36 P452 (YCBA)</span>", "<span><i>Sir Joshua Reynolds, 1723-1792, Galeries nationales du Grand Palais, Paris, 7 octobre - 16 December, 1985 [and] Royal Academy of Arts, Londres, 16 janvier - 30 mars, 1986., </i>Editions Réunion des Musées Nationaux, Paris, 1985, pp. 35, 188-90, no. 38, NJ18 R36 P4514 (YCBA)</span>", "<span>Ian McIntyre, <i>Garrick, </i>Allen Lane, London, 1999, no. 24, PN2598 G3 Z9 M25 1999 (YCBA)</span>", "<span><i>In honor of Paul Mellon, collector and benefactor, Essays, </i>National Gallery of Art, Washington, DC & Hanover, NH, 1986, pp. 2-3 5, fig. 1, N7442.2 M455 1986 (YCBA)</span>", "<span><i>Paul Mellon's legacy, a passion for British art : April 18-July 29, 2007, </i>Yale Center for British Art, New Haven, Conn., 2007, p. 13, V 1735 (YCBA)</span>", "<span>Ellis Waterhouse, <i>An Impressive Panorama of British Portraiture, </i>Apollo, v. 105, no. 182, April 1977, pp. 246-7, cover, N1 A54 + (YCBA) , Another copy of this article may be found in a separately bound and catalogued copy of this issue located on the Mellon Shelf [call number : N5220 M552 A7 1977 + (YCBA)]</span>", "<span>Brian Allen, <i>The Sport of Collecting : Paul Mellon and British Art, </i>Apollo, v.165,no.542, April 2007, pp. 38,39, fig. 10, N1 A54 + (YCBA)</span>", "<span>Geoffrey Agnew, <i>Yale's 1700 Mellon Pictures, </i>The Times (London), issue no. 59989, Thursday, April 28, 1977, p. 9, Available Online : Times Digital Archive , Also available on Microfilm : Film An T842 (SML)</span>", "<span>Malcolm Cormack, <i>Star Quality, </i>ART News, Summer 1983, pp. 112-113, N1 A6 OVERSIZE (HAAS)</span>", "<span>Joseph Musser Jr., <i>Sir Joshua Reynold's 'Mrs. Abington as Miss Prue', </i>South Atlantic Quarterly, vol. 83, Spring 1984, pp. 176-92, A89 250 (SML)</span>", "<span>Charles Robert Leslie, <i>Life and times of Sir Joshua Reynolds, with notices of some of his contemporaries., </i>John Murray, London, 1865, pp. 226-7, NJ18 R36 L47 (YCBA) , Also available on Microfche: The Nineteenth Century: Visual Arts ; Pos: Fiche.N.4.2.357) (SML Fiche B1244 Fiche.N.4.2.357)</span>", "<span>Allard Sebastien, <i>Portraits publics, portraits privâes, 1770-1830, Galeries nationales du Grand Palais, Paris, 4 octobre 2006-9 janvier 2007 ; the Royal Academy of Arts, Londres, 3 fâevrier-20 avril 2007 ; the Solomon R. Guggenheim Museum, New York, 18 mai-10 septembre 2007, </i>Réunion des Musées Nationaux, Paris, 2006, pp. 93, 122-3, cat. 28, ND1314.4 P67 2006 + (YCBA)</span>", "<span><i>Citizens and kings, portraits in the age of revolution 1760-1830., </i>Royal Academy of Arts, London, 2007, pp. 84-5, fig. 43, ND1314.4 C5713 2007 + (YCBA)</span>", "<span><i>Representing emotions, new connections in the histories of art, music, and medicine, </i>Ashgate Publishing, Aldershot, Hants, England Burlington, VT, 2005, p. 158, fig. 9.2, RC480.5 R386X 2005 (Haas)</span>", "<span>Robin Simon, <i>Reynolds and the Double-entendre, The Society of Dilettanti Portraits, </i>British Art Journal, vol. 3, no. 1, Spring, 2001, p. 77, Pl. 9, N6761 B74 + (YCBA)</span>", "<span>Ellis Waterhouse, <i>Reynolds, </i>Phaidon, New York, NY, 1973, pl. 54, NJ18 R36 W37 1973 + (YCBA)</span>", "<span>South Kensington Museum, <i>Catalogue of the second special exhibition of national portraits commencing with the reign of William and Mary and ending with the year MDCCC, on loan to the South Kensington museum. May 1, 1867., </i>London, 1867, pp. 133-4, no. 601, N7598 S6 1867 (YCBA)</span>", "<span>Grosvenor Gallery, <i>Catalogue of the works of Sir Joshua Reynolds exhibited at the Grosvenor Gallery MDCCCLXXXIII-IV, illustrated with photo-intaglio plates after the originals by Alfred Dawson., </i>Chiswick Press, London, 1884, pp. 11-12, no. 7, NJ18 R36 G76 + (YCBA)</span>", "<span><i>Sir Joshua Reynolds, loan exhibition in aid of the Royal Northern Hospital., </i>Royal Northern Hospital, London, 1937, p. 36, no. 56, NJ18 R36 L65 (YCBA)</span>", "<span><i>Exhibition of works by Sir Joshua Reynolds P.R.A., 1723-1792, 18th February to 19th March 1961., </i>Birmingham Museum & Art Gallery, Birmingham, 1961, pp. 31-32, no. 50, NJ18 R36 E85 1961 (YCBA)</span>", "<span>British Institution, <i>Catalogue of pictures by the late Sir Joshua Reynolds, exhibited by the permission of the proprietors, in honor of the memory of that distinguished artist and for the improvement of British Art., </i>W. Bulmer & Co., London, 1813, no. 103, N5055 B7 A13 1813 + (RARE BOOKS, YCBA)</span>", "<span>Richard Wendorf, <i>Sir Joshua Reynolds, the painter in society, </i>Harvard University Press, Cambridge, Mass., 1996, p. 128, NJ18 R36 W46 1996 (YCBA)</span>", "<span><i>The Grosvenor Exhibition (First Notice), </i>Athenaeum, no. 2931, December 29 1883, pp. 873-4, Available Online: British Periodicals II , Also Available: A88 At421 + (SML)</span>", "<span>Joseph Burke, <i>English art 1714-1800, </i>Clarendon Press, Oxford, 1976, p. 208, pl. 56c, N6761 O9 9 (YCBA)</span>", "<span>Angus Trumble, <i>The finger, a handbook, </i>Farrar, Straus and Giroux, New York, 2010, p. 128, GT498.F46 T78 2010 (YCBA)</span>", "<span>Felicity Nussbaum, <i>Rival queens, actresses, performance, and the eighteenth-century British theater, </i>University of Pennsylvania Press, Philadelphia, 2010, pp. 261, 262, fig. 23, PN2582.W65 N87 2010 (YCBA)</span>", "<span><i>British Art at Yale, </i>Apollo, v.105, no. 182, April 1977, pp. 246-7, cover, N5220 M552 A7 1977 OVERSIZE (YCBA) , Published as April 1977 issue of Apollo; all of the articles may also be found in bound Apollo Volume [N1 A54 105:2 +]</span>", "<span><i>The Yale Center for British Art, An Anniversary Celebration of Paul Mellon's Great Legacy, </i>Apollo, April 2007, p. 39, fig. 10, N5220 M552 A7 OVERSIZE (YCBA) , Appeared as April 2007 issue of Apollo;; all of the articles may also be found in bound Apollo Volume [N1 A54 165:2 +]</span>", "<span>William Cotton Esq., <i>A Catalogue of the Portraits Painted by Sir Joshua Reynolds, Knt., P.R.A., Compiled from his autograph memorandum books, and from printed catalogues, </i>Longman, London and Plymouth, UK, 1857, p. 110, no. 72, NJ18 R36 C65 (YCBA)</span>", "<span><i>Sotheby's sale catalogue : Important British Pictures : 27 November 2003, </i>Sotheby's, Sotheby's, London, November 27, 2003, p. 35, Fig. 2, Auction Catalogues (YCBA)</span>", "<span>Richard Brinsley Sheridan, <i>The Rivals, The Duenna, A Trip to Scarborough, The School for Scandal, The Critic, </i>Oxford University Press, Oxford, New York, 1998, book cover, PR3681 C67 1998</span>", "<span>James Northcote, <i>Memoirs of Sir Joshua Reynolds ..., Comprising original anecdotes, of many distinguished persons, his contemporaries: and a brief analysis of his discourses. To which are added, Varieties on art., </i>M. Carey & Son, Philadelphia, 1817, p. 159, Available Online (Internet Archive)</span>", "<span><i>Abington, Francis (1737-1815), </i>Oxford Dictionary of National Biography, 1885, Available Online (Archive within ODNB)</span>", "<span><i>Abington [nee Barton], Francis [Fanny] (1737-1815), </i>Oxford Dictionary of National Biography, vol. 1, 2004, p. 109, DA28 D5 2004 (YCBA) , Also available Online</span>", "<span>Musée du Petit Palais, <i>Peinture romantique anglaise et les preraphaelites., Exposition: 21 janvier-16 avril 1972., </i>Paris, 1972, No. 214, ND467 P37 1972 (YCBA)</span>", "<span><i>Sir Joshua Reynolds :, A plethora of portraits, </i>Economist, February 1, 1986, p. 97, Available Online (Economist Archive)</span>", "<span>James Northcote, <i>Memoirs of Sir Joshua Reynolds, KNT. ..., comprising original anecdotes of many distinguished persons, his contemporaries, and a brief analysis of his discourses : to which are added, Varieties on art, </i>London, 1813, p. (6) appendix, ND497.R4 N8 1813 Oversize (YCBA Rare)</span>", "<span><i>Christie's Sale Catalogue : Highly Important English Pictures c.1600 - c. 1850 : 23 June 1972, </i>Christie's, 1972, p. 60, lot 116, pl. 116, Sales Catalogues (YCBA)</span>", "<span>John McDonald, <i>A Feast of Mellon, </i>Sydney Morning Herald, May 9, 1998, p. 14, Film An Sy25 (SML) , Also Available Online (Factiva database)</span>", "<span>Mary Webster, <i>Johan Zoffany, 1733-1810, </i>Yale University Press, New Haven, CT, 2011, p. 222, NJ18 Z68 W43 2011 + (YCBA)</span>", "<span>Simon Schama, <i>The Yale Centre for British Art, </i>TLS, the Times Literary Supplement, Issue no. 3923, May 20, 1977, p. 620, Film S748 (SML) , Also avaiable online in TLS Historical Archive (ORBIS)</span>", "<span>Lindsay Duguid, <i>The Recollected Works, </i>TLS, the Times Literary Supplement, Issue no. 5458, November 8, 2007, p. 17, Available Online : TLS Archive , Also Available on microfilm : Film S748 (SML)</span>", "<span>Gillian Perry, <i>The first actresses Nell Gwyn to Sarah Siddons, </i>National Portrait Gallery, London, 2011, pp. 44-45, 110, 112, fig.28 and p.112, PN2582.W65 P472 2011 + OVERSIZE (YCBA)</span>", "<span>Royal Academy of Arts, <i>Exhibition Catalogue. 1771. 3d, </i>Exhibition of the Royal Academy of Arts, no. 3, London, 1771, p. 16, no. 161, N5054 A53 (YCBA)</span>", "<span>Michael Glover, <i>Scenes from Afar, </i>The Times (London), Saturday, September 22, 2007, p. 28, Available Online : Times Digital Arcive , Also available on Microfilm: Film An T482 (SML)</span>", "<span>Catherine M. Gordon, <i>British paintings Hogarth to Turner, </i>Frederick Warne, London, 1981, p. 57, ND466 G67 (YCBA)</span>", "<span>Royal Academy of Arts, <i>Exhibition of works by old masters and by deceased masters of the British School : winter exhibition, 7th year, </i>London, 1876, p.6, no. 31, Fiche B112 (YCBA)</span>", "<span>Charles Robert Leslie, <i>Life and Times of Sir Joshua Reynolds, With Notices of Some of His Contemporaries, </i>John Murray, London, 1865, vol 1: p. 226 vol 2: p. 408, 11b, no. 2 (vol 2), NJ18 R36 L47 (YCBA)</span>", "<span><i>A Plethora of Portraits, </i>Economist, vol. 299, 1 February 1986, p. 97, Available online : Gale Cengage Economist Historical Archive , Also available in hardcopy at LSF; see Orbis for call numbers</span>", "<span>Giles Waterfield, <i>Mr Mellon, </i>RA : the magazine for the Friends of the Royal Academy, No. 96, Autumn 2007, pp. 71, 73, V 1905 (YCBA) , Detached from RA, no.96 (2007:Autumn)</span>", "<span>Mark Hallett, <i>Reynolds : portraiture in action, </i>The Paul Mellon Centre for Studies in British Art, New Haven, 2014, pp. 393-94, fig. no. 376, NJ18.R36 H35 2014 OVERSIZE (YCBA)</span>", "<span>Mark Hallett, <i>Diary : Mark Hallett on his long-term relationship with Reynolds, </i>Apollo, vol. 181, March 2015, p. 46, fig. 1, N1 A54 OVERSIZE (YCBA)</span>", "<span><i>Joshua Reynolds : experiments in paint, </i>The Wallace Collection, London, London, 2015, pp. 180-182, no. 17, col pl. and fig. 108, NJ18.R36 J6752 2015 OVERSIZE (YCBA)</span>" ]
+  } ],
+  "logo" : "https://static.britishart.yale.edu/images/ycba_logo.jpg",
+  "related" : [ {
+    "@id" : "http://collections.britishart.yale.edu/vufind/Record/1669236",
+    "label" : "catalog entry at the Yale Center for British Art",
+    "format" : "text/html"
+  } ],
+  "seeAlso" : [ {
+    "@id" : "https://manifests.britishart.yale.edu/lido/5005.xml",
+    "format" : "text/xml",
+    "profile" : "http://www.lido-schema.org/schema/v1.0/lido-v1.0.xsd"
+  }, {
+    "@id" : "http://collection.britishart.yale.edu/id/data/object/5005",
+    "format" : "text/rdf+n3"
+  } ],
+  "sequences" : [ {
+    "@id" : "https://manifests.britishart.yale.edu/sequence/5005",
+    "@type" : "sc:Sequence",
+    "label" : "default sequence",
+    "viewingHint" : "individuals",
+    "canvases" : [ {
+      "images" : [ {
+        "resource" : {
+          "@type" : "dctypes:Image",
+          "service" : {
+            "profile" : "http://library.stanford.edu/iiif/image-api/1.1/conformance.html#level1",
+            "@id" : "https://images.britishart.yale.edu/iiif/1b747e8f-7754-482c-b5a2-9e1dc1986f4b",
+            "@context" : "http://iiif.io/api/image/1/context.json"
+          },
+          "format" : "image/jpeg",
+          "width" : 4492,
+          "@id" : "https://images.britishart.yale.edu/iiif/1b747e8f-7754-482c-b5a2-9e1dc1986f4b/full/full/0/native.jpg",
+          "label" : "cropped to image, recto, unframed",
+          "height" : 5460
+        },
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "@id" : "https://manifests.britishart.yale.edu/annotation/ba-obj-5005-0004-pub",
+        "on" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-0004-pub"
+      } ],
+      "@type" : "sc:Canvas",
+      "width" : 4492,
+      "@id" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-0004-pub",
+      "label" : "cropped to image, recto, unframed",
+      "height" : 5460
+    }, {
+      "images" : [ {
+        "resource" : {
+          "@type" : "dctypes:Image",
+          "service" : {
+            "profile" : "http://library.stanford.edu/iiif/image-api/1.1/conformance.html#level1",
+            "@id" : "https://images.britishart.yale.edu/iiif/c1a7bcda-b4f1-4ca5-8d42-0b7038cd0787",
+            "@context" : "http://iiif.io/api/image/1/context.json"
+          },
+          "format" : "image/jpeg",
+          "width" : 5410,
+          "@id" : "https://images.britishart.yale.edu/iiif/c1a7bcda-b4f1-4ca5-8d42-0b7038cd0787/full/full/0/native.jpg",
+          "label" : "recto, unframed",
+          "height" : 7992
+        },
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "@id" : "https://manifests.britishart.yale.edu/annotation/ba-obj-5005-0004-bar",
+        "on" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-0004-bar"
+      } ],
+      "@type" : "sc:Canvas",
+      "width" : 5410,
+      "@id" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-0004-bar",
+      "label" : "recto, unframed",
+      "height" : 7992
+    }, {
+      "images" : [ {
+        "resource" : {
+          "@type" : "dctypes:Image",
+          "service" : {
+            "profile" : "http://library.stanford.edu/iiif/image-api/1.1/conformance.html#level1",
+            "@id" : "https://images.britishart.yale.edu/iiif/6eb7b6b7-1921-48d0-8b87-c7181ffd889f",
+            "@context" : "http://iiif.io/api/image/1/context.json"
+          },
+          "format" : "image/jpeg",
+          "width" : 5103,
+          "@id" : "https://images.britishart.yale.edu/iiif/6eb7b6b7-1921-48d0-8b87-c7181ffd889f/full/full/0/native.jpg",
+          "label" : "framed, recto",
+          "height" : 5856
+        },
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "@id" : "https://manifests.britishart.yale.edu/annotation/ba-obj-5005-0002-pub",
+        "on" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-0002-pub"
+      } ],
+      "@type" : "sc:Canvas",
+      "width" : 5103,
+      "@id" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-0002-pub",
+      "label" : "framed, recto",
+      "height" : 5856
+    }, {
+      "images" : [ {
+        "resource" : {
+          "@type" : "dctypes:Image",
+          "service" : {
+            "profile" : "http://library.stanford.edu/iiif/image-api/1.1/conformance.html#level1",
+            "@id" : "https://images.britishart.yale.edu/iiif/7f02d034-ddfe-4dc6-8e8f-c6851ad7e191",
+            "@context" : "http://iiif.io/api/image/1/context.json"
+          },
+          "format" : "image/jpeg",
+          "width" : 5140,
+          "@id" : "https://images.britishart.yale.edu/iiif/7f02d034-ddfe-4dc6-8e8f-c6851ad7e191/full/full/0/native.jpg",
+          "label" : "framed, verso ",
+          "height" : 5911
+        },
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "@id" : "https://manifests.britishart.yale.edu/annotation/ba-obj-5005-0003-pub",
+        "on" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-0003-pub"
+      } ],
+      "@type" : "sc:Canvas",
+      "width" : 5140,
+      "@id" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-0003-pub",
+      "label" : "framed, verso ",
+      "height" : 5911
+    }, {
+      "images" : [ {
+        "resource" : {
+          "@type" : "dctypes:Image",
+          "service" : {
+            "profile" : "http://library.stanford.edu/iiif/image-api/1.1/conformance.html#level1",
+            "@id" : "https://images.britishart.yale.edu/iiif/3b437776-3278-42dc-9daf-e881d8934c66",
+            "@context" : "http://iiif.io/api/image/1/context.json"
+          },
+          "format" : "image/jpeg",
+          "width" : 5976,
+          "@id" : "https://images.britishart.yale.edu/iiif/3b437776-3278-42dc-9daf-e881d8934c66/full/full/0/native.jpg",
+          "label" : "detail, recto ",
+          "height" : 4727
+        },
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "@id" : "https://manifests.britishart.yale.edu/annotation/ba-obj-5005-0005-pub",
+        "on" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-0005-pub"
+      } ],
+      "@type" : "sc:Canvas",
+      "width" : 5976,
+      "@id" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-0005-pub",
+      "label" : "detail, recto ",
+      "height" : 4727
+    }, {
+      "images" : [ {
+        "resource" : {
+          "@type" : "dctypes:Image",
+          "service" : {
+            "profile" : "http://library.stanford.edu/iiif/image-api/1.1/conformance.html#level1",
+            "@id" : "https://images.britishart.yale.edu/iiif/8621278e-1ebc-4548-8834-0124ee800c41",
+            "@context" : "http://iiif.io/api/image/1/context.json"
+          },
+          "format" : "image/jpeg",
+          "width" : 8016,
+          "@id" : "https://images.britishart.yale.edu/iiif/8621278e-1ebc-4548-8834-0124ee800c41/full/full/0/native.jpg",
+          "label" : "Composite X-radiograph",
+          "height" : 9534
+        },
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "@id" : "https://manifests.britishart.yale.edu/annotation/ba-obj-5005-8001-mas",
+        "on" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-8001-mas"
+      } ],
+      "@type" : "sc:Canvas",
+      "width" : 8016,
+      "@id" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-8001-mas",
+      "label" : "Composite X-radiograph",
+      "height" : 9534
+    }, {
+      "images" : [ {
+        "resource" : {
+          "@type" : "dctypes:Image",
+          "service" : {
+            "profile" : "http://library.stanford.edu/iiif/image-api/1.1/conformance.html#level1",
+            "@id" : "https://images.britishart.yale.edu/iiif/8621278e-1ebc-4548-8834-0124ee800c41",
+            "@context" : "http://iiif.io/api/image/1/context.json"
+          },
+          "format" : "image/jpeg",
+          "width" : 8016,
+          "@id" : "https://images.britishart.yale.edu/iiif/8621278e-1ebc-4548-8834-0124ee800c41/full/full/0/native.jpg",
+          "label" : "Composite X-radiograph",
+          "height" : 9534
+        },
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "@id" : "https://manifests.britishart.yale.edu/annotation/ba-obj-5005-8001-cons",
+        "on" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-cons-overlay"
+      }, {
+        "resource" : {
+          "@type" : "dctypes:Image",
+          "service" : {
+            "profile" : "http://library.stanford.edu/iiif/image-api/1.1/conformance.html#level1",
+            "@id" : "https://images.britishart.yale.edu/iiif/1b747e8f-7754-482c-b5a2-9e1dc1986f4b",
+            "@context" : "http://iiif.io/api/image/1/context.json"
+          },
+          "format" : "image/jpeg",
+          "width" : 4492,
+          "@id" : "https://images.britishart.yale.edu/iiif/1b747e8f-7754-482c-b5a2-9e1dc1986f4b/full/full/0/native.jpg",
+          "label" : "cropped to image, recto, unframed",
+          "height" : 5460
+        },
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "@id" : "https://manifests.britishart.yale.edu/annotation/ba-obj-5005-0004-cons",
+        "on" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-cons-overlay#xywh=367,267,7318,8895"
+      }, {
+        "resource" : {
+          "@type" : "dctypes:Image",
+          "service" : {
+            "profile" : "http://library.stanford.edu/iiif/image-api/1.1/conformance.html#level1",
+            "@id" : "https://images.britishart.yale.edu/iiif/3b437776-3278-42dc-9daf-e881d8934c66",
+            "@context" : "http://iiif.io/api/image/1/context.json"
+          },
+          "format" : "image/jpeg",
+          "width" : 5976,
+          "@id" : "https://images.britishart.yale.edu/iiif/3b437776-3278-42dc-9daf-e881d8934c66/full/full/0/native.jpg",
+          "label" : "detail, recto ",
+          "height" : 4727
+        },
+        "@type" : "oa:Annotation",
+        "motivation" : "sc:painting",
+        "@id" : "https://manifests.britishart.yale.edu/annotation/ba-obj-5005-0005-cons",
+        "on" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-cons-overlay#xywh=1070,1070,5962,4716"
+      } ],
+      "@type" : "sc:Canvas",
+      "width" : 8016,
+      "@id" : "https://manifests.britishart.yale.edu/canvas/ba-obj-5005-cons-overlay",
+      "label" : "Conservation overlay",
+      "height" : 9534
+    } ]
+  } ]
+}

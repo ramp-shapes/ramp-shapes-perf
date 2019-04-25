@@ -1,0 +1,173 @@
+{
+  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@id": "https://purl.stanford.edu/ch264fq0568/iiif/manifest",
+  "@type": "sc:Manifest",
+  "label": "Bijin to omocha no jidōsha ni notta kodomo : hikifuda -- 美人とおもちゃの自動車に乗った子供 : 引札",
+  "attribution": "",
+  "logo": {
+    "@id": "https://stacks.stanford.edu/image/iiif/wy534zh7137%2FSULAIR_rosette/full/400,/0/default.jpg",
+    "service": {
+      "@context": "http://iiif.io/api/image/2/context.json",
+      "@id": "https://stacks.stanford.edu/image/iiif/wy534zh7137%2FSULAIR_rosette",
+      "profile": "http://iiif.io/api/image/2/level2.json"
+    }
+  },
+  "seeAlso": {
+    "@id": "https://purl.stanford.edu/ch264fq0568.mods",
+    "format": "application/mods+xml"
+  },
+  "metadata": [
+    {
+      "label": "Available Online",
+      "value": "<a href='https://purl.stanford.edu/ch264fq0568'>https://purl.stanford.edu/ch264fq0568</a>"
+    },
+    {
+      "label": "Title",
+      "value": "Bijin to omocha no jidōsha ni notta kodomo: hikifuda"
+    },
+    {
+      "label": "Contributor",
+      "value": "Yamaguchi Yasaburō."
+    },
+    {
+      "label": "Type",
+      "value": "StillImage"
+    },
+    {
+      "label": "Type",
+      "value": "picture"
+    },
+    {
+      "label": "Type",
+      "value": "still image-sti"
+    },
+    {
+      "label": "Date",
+      "value": "uuuu-uuuu"
+    },
+    {
+      "label": "Date",
+      "value": "[date of publication not identified]"
+    },
+    {
+      "label": "Publisher",
+      "value": "Yamaguchi Yasaburō,"
+    },
+    {
+      "label": "Language",
+      "value": "jpn"
+    },
+    {
+      "label": "Format",
+      "value": "1 print : lithograph, color ; 26 x 38 cm"
+    },
+    {
+      "label": "Format",
+      "value": "nonprojected graphic"
+    },
+    {
+      "label": "Description",
+      "value": "This is an advertisement for a sericulture merchant, Yamaguchi Yasaburo. The picture depicts a mother assisting a young boy while he drives a toy car. Behind them, a lake and a tall snowcapped mountain can be seen."
+    },
+    {
+      "label": "Description",
+      "value": "\"Yorozu shirui mawata nakawatarui kairyō sanmōrui tokuyaku hanbai kenzen sanshu seizō hanbai\""
+    },
+    {
+      "label": "Description",
+      "value": "Title from dealer description."
+    },
+    {
+      "label": "Description",
+      "value": "Color lithograph."
+    },
+    {
+      "label": "Description",
+      "value": "NC998.6 .J3 B55 bound with NC998 .6.J3 O83 1868."
+    },
+    {
+      "label": "Subject",
+      "value": "Sericulture"
+    },
+    {
+      "label": "Coverage",
+      "value": "Japan"
+    },
+    {
+      "label": "Subject",
+      "value": "Sericulture--Japan--Posters"
+    },
+    {
+      "label": "Title",
+      "value": "美人とおもちゃの自動車に乗った子供: 引札"
+    },
+    {
+      "label": "Contributor",
+      "value": "山口彌三郎."
+    },
+    {
+      "label": "Identifier",
+      "value": "919096012"
+    },
+    {
+      "label": "Relation",
+      "value": "Early Twentieth Century Japanese Advertisements"
+    },
+    {
+      "label": "Relation",
+      "value": "Collection of Twentieth Century Japanese Posters"
+    },
+    {
+      "label": "PublishDate",
+      "value": "2018-03-01T23:02:08Z"
+    }
+  ],
+  "description": "This is an advertisement for a sericulture merchant, Yamaguchi Yasaburo. The picture depicts a mother assisting a young boy while he drives a toy car. Behind them, a lake and a tall snowcapped mountain can be seen.",
+  "thumbnail": {
+    "@id": "https://stacks.stanford.edu/image/iiif/ch264fq0568%2Fch264fq0568_00_0001/full/!400,400/0/default.jpg",
+    "@type": "dctypes:Image",
+    "format": "image/jpeg",
+    "service": {
+      "@context": "http://iiif.io/api/image/2/context.json",
+      "@id": "https://stacks.stanford.edu/image/iiif/ch264fq0568%2Fch264fq0568_00_0001",
+      "profile": "http://iiif.io/api/image/2/level2.json"
+    }
+  },
+  "sequences": [
+    {
+      "@id": "https://purl.stanford.edu/ch264fq0568#sequence-1",
+      "@type": "sc:Sequence",
+      "label": "Current order",
+      "viewingDirection": "left-to-right",
+      "canvases": [
+        {
+          "@id": "https://purl.stanford.edu/ch264fq0568/iiif/canvas/ch264fq0568_1",
+          "@type": "sc:Canvas",
+          "label": "Image 1",
+          "height": 6637,
+          "width": 9553,
+          "images": [
+            {
+              "@id": "https://purl.stanford.edu/ch264fq0568/iiif/annotation/ch264fq0568_1",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://stacks.stanford.edu/image/iiif/ch264fq0568%2Fch264fq0568_00_0001/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "height": 6637,
+                "width": 9553,
+                "service": {
+                  "@context": "http://iiif.io/api/image/2/context.json",
+                  "@id": "https://stacks.stanford.edu/image/iiif/ch264fq0568%2Fch264fq0568_00_0001",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+              },
+              "on": "https://purl.stanford.edu/ch264fq0568/iiif/canvas/ch264fq0568_1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
