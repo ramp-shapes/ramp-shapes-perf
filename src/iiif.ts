@@ -50,7 +50,9 @@ interface BenchmarkedManifest {
   readonly jsonldFlatten: object;
   readonly quads: rdfxjson.Rdf.Quad[];
   jsonldFramed?: object;
+  jsonldFlattenQuadCount?: number;
   rdfxjsonFramed?: object;
+  rdfxjsonFlattenQuadCount?: number;
 }
 
 async function main() {
@@ -157,17 +159,18 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
     }
 
     try {
-      const quads = rdfxjson.flatten({
+      const quads = Array.from(rdfxjson.flatten({
         rootShape: MANIFEST_SHAPE_ID,
         shapes: SHAPES,
         value: manifest.rdfxjsonFramed,
-      });
+      }));
+      manifest.rdfxjsonFlattenQuadCount = quads.length;
       await Util.writeQuadsToTurtle(
         path.join(__dirname, '../out/flatten-rdfxjson', manifest.fileName),
         quads,
         PREFIXES
       );
-      console.log('[rdfxjon] flatten OK');
+      console.log(`[rdfxjon] flatten OK (${manifest.rdfxjsonFlattenQuadCount} quads)`);
     } catch (err) {
       console.error('[rdfxjson] flatten error:', err);
     }
@@ -179,12 +182,13 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
         {documentLoader: DOCUMENT_LOADER}
       );
       const quads = await JsonLd.toRdf(flatDocument, {documentLoader: DOCUMENT_LOADER});
+      manifest.jsonldFlattenQuadCount = quads.length;
       await Util.writeQuadsToTurtle(
         path.join(__dirname, '../out/flatten-jsonld', manifest.fileName),
         quads,
         PREFIXES
       );
-      console.log('[jsonld] flatten OK');
+      console.log(`[jsonld] flatten OK (${manifest.jsonldFlattenQuadCount} quads)`);
     } catch (err) {
       console.error('[jsonld] flatten error:', err);
     }

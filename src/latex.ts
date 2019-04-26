@@ -12,6 +12,7 @@ async function writeLatexChart(statName: string) {
 
   await writeChartData(stats, statName, 'jsonld');
   await writeChartData(stats, statName, 'rdfxjson');
+  compareOnAverage(stats, statName);
 }
 
 async function writeChartData(stats: BenchmarkGroup[], statName: string, targetName: string) {
@@ -41,6 +42,22 @@ async function writeChartData(stats: BenchmarkGroup[], statName: string, targetN
     data,
     {encoding: 'utf8'}
   );
+}
+
+function compareOnAverage(stats: BenchmarkGroup[], statName: string) {
+  let totalRelation = 0;
+  let count = 0;
+  for (const group of stats) {
+    if (statName === 'frame' && group.name === '39_Vatican Library.json') {
+      continue;
+    }
+    count++;
+    const jsonldEvent = group.events.find(e => e.name === 'jsonld')!;
+    const rdfxjsonEvent = group.events.find(e => e.name === 'rdfxjson')!;
+    totalRelation += (jsonldEvent.stats.mean - rdfxjsonEvent.stats.mean) / rdfxjsonEvent.stats.mean;
+  }
+  const averageRelation = totalRelation / count;
+  console.log(`'${statName}' rdfxjson performance relative to JSON-LD is ${(averageRelation * 100).toFixed(2)}%`);
 }
 
 async function main() {
