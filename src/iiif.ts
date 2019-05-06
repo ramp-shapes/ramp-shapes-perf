@@ -46,6 +46,7 @@ const DOCUMENT_LOADER = JsonLd.makeDocumentLoader({
 });
 
 interface BenchmarkedManifest {
+  readonly manifestName: string;
   readonly fileName: string;
   readonly jsonldFlatten: object;
   readonly quads: rdfxjson.Rdf.Quad[];
@@ -59,10 +60,12 @@ async function main() {
   const manifests: BenchmarkedManifest[] = [];
 
   const manifestDir = path.join(__dirname, '../datasets/iiif');
-  for (const manifestName of await Util.readdir(manifestDir)) {
+  for (const fileName of await Util.readdir(manifestDir)) {
+    if (!fileName.endsWith('.json')) { continue; }
+    const manifestName = fileName.substring(0, fileName.length - '.json'.length);
     let manifest: BenchmarkedManifest;
     try {
-      const manifestPath = path.join(manifestDir, manifestName);
+      const manifestPath = path.join(manifestDir, fileName);
       const jsonldDocument = JSON.parse(await Util.readFile(manifestPath, {encoding: 'utf8'}));
       const jsonldFlatten = await JsonLd.flatten(
         jsonldDocument,
@@ -70,10 +73,10 @@ async function main() {
         {documentLoader: DOCUMENT_LOADER}
       );
       const quads = await JsonLd.toRdf(jsonldDocument, {documentLoader: DOCUMENT_LOADER});
-      manifest = {fileName: manifestName, jsonldFlatten, quads};
+      manifest = {manifestName, fileName, jsonldFlatten, quads};
       manifests.push(manifest);
     } catch (err) {
-      console.warn('Skipping ', manifestName);
+      console.warn('Skipping ', fileName);
     }
   }
 
@@ -101,7 +104,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
   await Util.makeDirectoryIfNotExists(path.join(outDir, 'flatten-jsonld'));
 
   for (const manifest of manifests) {
-    console.log('Testing manifest: ', manifest.fileName, `(${manifest.quads.length} quads)`);
+    console.log('Testing manifest: ', manifest.manifestName, `(${manifest.quads.length} quads)`);
     try {
       let foundSoultion = false;
       const startRxjTime = performance.now();
@@ -123,7 +126,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
         const json = Util.toJson(value);
 
         await Util.writeFile(
-          path.join(__dirname, '../out/frame-rdfxjson', manifest.fileName),
+          path.join(__dirname, '../out/frame-rdfxjson', `${manifest.manifestName}.json`),
           json,
           {encoding: 'utf8'}
         );
@@ -150,7 +153,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
 
       const json = JSON.stringify(manifest.jsonldFramed, null, 2);
       await Util.writeFile(
-        path.join(__dirname, '../out/frame-jsonld', manifest.fileName),
+        path.join(__dirname, '../out/frame-jsonld', `${manifest.manifestName}.json`),
         json,
         {encoding: 'utf8'}
       );
@@ -166,7 +169,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
       }));
       manifest.rdfxjsonFlattenQuadCount = quads.length;
       await Util.writeQuadsToTurtle(
-        path.join(__dirname, '../out/flatten-rdfxjson', manifest.fileName),
+        path.join(__dirname, '../out/flatten-rdfxjson', `${manifest.manifestName}.ttl`),
         quads,
         PREFIXES
       );
@@ -184,7 +187,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
       const quads = await JsonLd.toRdf(flatDocument, {documentLoader: DOCUMENT_LOADER});
       manifest.jsonldFlattenQuadCount = quads.length;
       await Util.writeQuadsToTurtle(
-        path.join(__dirname, '../out/flatten-jsonld', manifest.fileName),
+        path.join(__dirname, '../out/flatten-jsonld', `${manifest.manifestName}.ttl`),
         quads,
         PREFIXES
       );
@@ -200,7 +203,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
 async function benchmarkFrame(manifests: ReadonlyArray<BenchmarkedManifest>) {
   const stats: BenchmarkGroup[] = [];
   for (const manifest of manifests) {
-    console.log('Benchmark frame(): ', manifest.fileName);
+    console.log('Benchmark frame(): ', manifest.manifestName);
     const events = await runBenchmark([
       {
         name: `jsonld`,
@@ -208,6 +211,21 @@ async function benchmarkFrame(manifests: ReadonlyArray<BenchmarkedManifest>) {
           await JsonLd.frame(
             manifest.jsonldFlatten,
             JSONLD_IIIF_FRAME,
+            {documentLoader: DOCUMENT_LOADER}
+          );
+        }
+      },
+      {
+        name: `jsonld-plus-compact`,
+        benchmark: async () => {
+          const framed = await JsonLd.frame(
+            manifest.jsonldFlatten,
+            JSONLD_IIIF_FRAME,
+            {documentLoader: DOCUMENT_LOADER}
+          );
+          await JsonLd.compact(
+            framed,
+            'http://iiif.io/api/presentation/2/context.json',
             {documentLoader: DOCUMENT_LOADER}
           );
         }
@@ -226,7 +244,7 @@ async function benchmarkFrame(manifests: ReadonlyArray<BenchmarkedManifest>) {
         }
       }
     ]);
-    stats.push({name: manifest.fileName, quadCount: manifest.quads.length, events});
+    stats.push({name: manifest.manifestName, quadCount: manifest.quads.length, events});
     console.log('-----');
   }
   return stats;
@@ -235,14 +253,13 @@ async function benchmarkFrame(manifests: ReadonlyArray<BenchmarkedManifest>) {
 async function benchmarkFlatten(manifests: ReadonlyArray<BenchmarkedManifest>) {
   const stats: BenchmarkGroup[] = [];
   for (const manifest of manifests) {
-    console.log('Benchmark flatten(): ', manifest.fileName);
+    console.log('Benchmark toRdf()/flatten(): ', manifest.manifestName);
     const events = await runBenchmark([
       {
         name: `jsonld`,
         benchmark: async () => {
-          await JsonLd.flatten(
+          await JsonLd.toRdf(
             manifest.jsonldFramed!,
-            JSONLD_IIIF_FRAME,
             {documentLoader: DOCUMENT_LOADER}
           );
         }
@@ -261,7 +278,7 @@ async function benchmarkFlatten(manifests: ReadonlyArray<BenchmarkedManifest>) {
         }
       }
     ]);
-    stats.push({name: manifest.fileName, quadCount: manifest.quads.length, events});
+    stats.push({name: manifest.manifestName, quadCount: manifest.quads.length, events});
     console.log('-----');
   }
   return stats;

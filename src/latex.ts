@@ -3,15 +3,16 @@ import * as path from 'path';
 import { BenchmarkGroup } from './benchmark';
 import * as Util from './util';
 
-async function writeLatexChart(statName: string) {
+async function writeLatexChart(statName: string, targets: ReadonlyArray<string>) {
   const statsJson = await Util.readFile(
     path.join(__dirname, `../out/stats-${statName}.json`),
     {encoding: 'utf8'}
   );
   const stats = (JSON.parse(statsJson) as BenchmarkGroup[]);
 
-  await writeChartData(stats, statName, 'jsonld');
-  await writeChartData(stats, statName, 'rdfxjson');
+  for (const target of targets) {
+    await writeChartData(stats, statName, target);
+  }
   compareOnAverage(stats, statName);
 }
 
@@ -45,24 +46,33 @@ async function writeChartData(stats: BenchmarkGroup[], statName: string, targetN
 }
 
 function compareOnAverage(stats: BenchmarkGroup[], statName: string) {
-  let totalRelation = 0;
+  const relationTotals = new Map<string, number>();
   let count = 0;
   for (const group of stats) {
-    if (statName === 'frame' && group.name === '39_Vatican Library.json') {
+    if (statName === 'frame' && group.name === '39_Vatican Library') {
       continue;
     }
     count++;
-    const jsonldEvent = group.events.find(e => e.name === 'jsonld')!;
     const rdfxjsonEvent = group.events.find(e => e.name === 'rdfxjson')!;
-    totalRelation += (jsonldEvent.stats.mean - rdfxjsonEvent.stats.mean) / rdfxjsonEvent.stats.mean;
+    for (const event of group.events) {
+      let total = relationTotals.get(event.name) || 0;
+      total += (event.stats.mean - rdfxjsonEvent.stats.mean) / rdfxjsonEvent.stats.mean;
+      relationTotals.set(event.name, total);
+    }
   }
-  const averageRelation = totalRelation / count;
-  console.log(`'${statName}' rdfxjson performance relative to JSON-LD is ${(averageRelation * 100).toFixed(2)}%`);
+  
+  for (const [targetName, relationTotal] of relationTotals) {
+    const averageRelation = relationTotal / count;
+    console.log(
+      `'${statName}' rdfxjson performance relative to ${targetName} ` +
+      `is ${(averageRelation * 100).toFixed(2)}%`
+    );
+  }
 }
 
 async function main() {
-  await writeLatexChart('frame');
-  await writeLatexChart('flatten');
+  await writeLatexChart('frame', ['jsonld', 'jsonld-plus-compact', 'rdfxjson']);
+  await writeLatexChart('flatten', ['jsonld', 'rdfxjson']);
 }
 
 main();
