@@ -108,7 +108,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
     try {
       let foundSoultion = false;
       const startRxjTime = performance.now();
-      const frameResults = rdfxjson.frame({
+      const frameResults = rdfxjson.lift({
         rootShape: MANIFEST_SHAPE_ID,
         shapes: SHAPES,
         triples: manifest.quads
@@ -162,7 +162,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
     }
 
     try {
-      const quads = Array.from(rdfxjson.flatten({
+      const quads = Array.from(rdfxjson.lower({
         rootShape: MANIFEST_SHAPE_ID,
         shapes: SHAPES,
         value: manifest.rdfxjsonFramed,
@@ -233,7 +233,7 @@ async function benchmarkFrame(manifests: ReadonlyArray<BenchmarkedManifest>) {
       {
         name: `rdfxjson`,
         benchmark: async () => {
-          const frameResults = rdfxjson.frame({
+          const frameResults = rdfxjson.lift({
             rootShape: MANIFEST_SHAPE_ID,
             shapes: SHAPES,
             triples: manifest.quads,
@@ -267,7 +267,7 @@ async function benchmarkFlatten(manifests: ReadonlyArray<BenchmarkedManifest>) {
       {
         name: `rdfxjson`,
         benchmark: async () => {
-          const quads = rdfxjson.flatten({
+          const quads = rdfxjson.lower({
             rootShape: MANIFEST_SHAPE_ID,
             shapes: SHAPES,
             value: manifest.rdfxjsonFramed,

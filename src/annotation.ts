@@ -32,7 +32,7 @@ async function main() {
   let rxjFramed: any;
   {
     const triples = QUADS as rdfxjson.Rdf.Quad[];
-    for (const {value} of rdfxjson.frame({rootShape: oa.Annotation, shapes: SHAPES, triples})) {
+    for (const {value} of rdfxjson.lift({rootShape: oa.Annotation, shapes: SHAPES, triples})) {
       rxjFramed = value;
       console.log('[rdfxjson] framed:', toJson(rxjFramed));
     }
@@ -51,7 +51,7 @@ async function main() {
       name: '[OA] frame rdfxjson',
       benchmark: async () => {
         const triples = QUADS as rdfxjson.Rdf.Quad[];
-        for (const {value: framed} of rdfxjson.frame({rootShape: oa.Annotation, shapes: SHAPES, triples})) {
+        for (const {value: framed} of rdfxjson.lift({rootShape: oa.Annotation, shapes: SHAPES, triples})) {
           // pass
         }
       }
@@ -68,7 +68,7 @@ async function main() {
     {
       name: '[OA] flatten rdfxjson',
       benchmark: async () => {
-        for (const triple of rdfxjson.flatten({rootShape: oa.Annotation, shapes: SHAPES, value: rxjFramed})) {
+        for (const triple of rdfxjson.lower({rootShape: oa.Annotation, shapes: SHAPES, value: rxjFramed})) {
           // pass
         }
       }
