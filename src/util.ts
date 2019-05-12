@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as N3 from 'n3';
-import { Rdf, Shape, ShapesForShapes, LiftTypeHandler, lift, vocabulary } from 'rdfxjson';
+import { Rdf, Shape, ShapesForShapes, FrameTypeHandler, frame, vocabulary } from 'rdfxjson';
 import { promisify } from 'util';
 
 export const exists = promisify(fs.exists);
@@ -51,7 +51,7 @@ export function toJson(match: unknown): string {
   }, 2);
 }
 
-const liftType: LiftTypeHandler = (value, shape) => {
+const convertShapeType: FrameTypeHandler = (value, shape) => {
   if (shape.type === 'resource') {
     const term = value as Rdf.Term;
     if (term.termType === 'NamedNode') {
@@ -67,16 +67,16 @@ const liftType: LiftTypeHandler = (value, shape) => {
       }
     }
   }
-  return LiftTypeHandler.convertToNativeType(value, shape);
+  return FrameTypeHandler.convertToNativeType(value, shape);
 };
 
 export function readShapes(path: string): Shape[] {
   const quads = readQuadsFromTurtle(path);
-  const framingResults = lift({
+  const framingResults = frame({
     rootShape: vocabulary.Shape,
     shapes: ShapesForShapes,
     triples: quads as Rdf.Quad[],
-    liftType,
+    convertType: convertShapeType,
   });
   const shapes: Shape[] = [];
   for (const {value} of framingResults) {

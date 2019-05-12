@@ -1,11 +1,8 @@
-import * as fs from 'fs';
 import * as path from 'path';
 import { performance } from 'perf_hooks';
-import { promisify } from 'util';
 import * as rdfxjson from 'rdfxjson';
 
 import * as JsonLd from './jsonld';
-import { rdf, rdfs, xsd, oa } from './namespaces';
 import * as Util from './util';
 import { BenchmarkGroup, runBenchmark } from './benchmark';
 
@@ -108,7 +105,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
     try {
       let foundSoultion = false;
       const startRxjTime = performance.now();
-      const frameResults = rdfxjson.lift({
+      const frameResults = rdfxjson.frame({
         rootShape: MANIFEST_SHAPE_ID,
         shapes: SHAPES,
         triples: manifest.quads
@@ -162,7 +159,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
     }
 
     try {
-      const quads = Array.from(rdfxjson.lower({
+      const quads = Array.from(rdfxjson.flatten({
         rootShape: MANIFEST_SHAPE_ID,
         shapes: SHAPES,
         value: manifest.rdfxjsonFramed,
@@ -233,7 +230,7 @@ async function benchmarkFrame(manifests: ReadonlyArray<BenchmarkedManifest>) {
       {
         name: `rdfxjson`,
         benchmark: async () => {
-          const frameResults = rdfxjson.lift({
+          const frameResults = rdfxjson.frame({
             rootShape: MANIFEST_SHAPE_ID,
             shapes: SHAPES,
             triples: manifest.quads,
@@ -267,7 +264,7 @@ async function benchmarkFlatten(manifests: ReadonlyArray<BenchmarkedManifest>) {
       {
         name: `rdfxjson`,
         benchmark: async () => {
-          const quads = rdfxjson.lower({
+          const quads = rdfxjson.flatten({
             rootShape: MANIFEST_SHAPE_ID,
             shapes: SHAPES,
             value: manifest.rdfxjsonFramed,
