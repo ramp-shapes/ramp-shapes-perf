@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as N3 from 'n3';
-import { Rdf, Shape, ShapesForShapes, FrameTypeHandler, frame, vocabulary } from 'rdfxjson';
+import { Rdf, Shape, frameShapes } from 'rdfxjson';
 import { promisify } from 'util';
 
 export const exists = promisify(fs.exists);
@@ -51,36 +51,7 @@ export function toJson(match: unknown): string {
   }, 2);
 }
 
-const convertShapeType: FrameTypeHandler = (value, shape) => {
-  if (shape.type === 'resource') {
-    const term = value as Rdf.Term;
-    if (term.termType === 'NamedNode') {
-      switch (term.value) {
-        case vocabulary.ObjectShape.value: return 'object';
-        case vocabulary.UnionShape.value: return 'union';
-        case vocabulary.SetShape.value: return 'set';
-        case vocabulary.OptionalShape.value: return 'optional';
-        case vocabulary.ResourceShape.value: return 'resource';
-        case vocabulary.LiteralShape.value: return 'literal';
-        case vocabulary.ListShape.value: return 'list';
-        case vocabulary.MapShape.value: return 'map';
-      }
-    }
-  }
-  return FrameTypeHandler.convertToNativeType(value, shape);
-};
-
 export function readShapes(path: string): Shape[] {
   const quads = readQuadsFromTurtle(path);
-  const framingResults = frame({
-    rootShape: vocabulary.Shape,
-    shapes: ShapesForShapes,
-    triples: quads as Rdf.Quad[],
-    convertType: convertShapeType,
-  });
-  const shapes: Shape[] = [];
-  for (const {value} of framingResults) {
-    shapes.push(value as Shape);
-  }
-  return shapes;
+  return frameShapes(quads as Rdf.Quad[]);
 }
