@@ -1,0 +1,8 @@
+@prefix ex: <http://example.com/schema/>.
+@prefix : <http://example.com/data/>.
+
+:anno1 a ex:Annotation;
+    ex:start :point1;
+    ex:end ("1" "2").
+:point1 a ex:Point;
+    ex:position 42.

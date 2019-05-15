@@ -10,12 +10,13 @@ This is a performance benchmark for [rdfxjson](https://github.com/AlexeyMz/rdfxj
 ## Usage
 After executing installation steps, run one of the following entry points:
 
-| Entry point               | Description                                  |
-|---------------------------|----------------------------------------------|
-| `dist/fetch-manifests.js` | Fetches IIIF manifests into `datasets/iiif`  |
-| `dist/annotation.js`      | Runs simple benchmark on OA annotation data  |
-| `dist/iiif.js`            | Runs full benchmark on IIIF manifest data    |
-| `dist/latex.js`           | Prepares benchmark stats as latex chart data |
+| Entry point               | Description                                    |
+|---------------------------|------------------------------------------------|
+| `dist/fetch-manifests.js` | Fetches IIIF manifests into `datasets/iiif`    |
+| `dist/annotation.js`      | Runs simple benchmark on OA annotation data    |
+| `dist/iiif.js`            | Runs full benchmark on IIIF manifest data      |
+| `dist/latex.js`           | Prepares benchmark stats as latex chart data   |
+| `dist/comparison.js`      | Generates library comparison on simple example |
 
 After running `dist/iiif.js` you can manually inspect frame and flatten operation results for each test case.
 
