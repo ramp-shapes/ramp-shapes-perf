@@ -1,4 +1,4 @@
-# Performance benchmark for RAM (RDF ADT Mapping)
+# Performance benchmark for RAM Shapes library
 
 This is a performance benchmark for [ram-shapes](https://github.com/AlexeyMz/ram-shapes) library.
 
