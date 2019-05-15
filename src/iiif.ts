@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { performance } from 'perf_hooks';
-import * as rdfxjson from 'rdfxjson';
+import * as Ram from 'ram-shapes';
 
 import * as JsonLd from './jsonld';
 import * as Util from './util';
@@ -13,7 +13,7 @@ const JSONLD_IIIF_IMAGE_CONTEXT_V2 = require('../datasets/iiif-schema/image-cont
 const JSONLD_IIIF_FRAME = require('../datasets/iiif-schema/manifest-frame.json');
 
 const SHAPES = Util.readShapes(path.join(__dirname, '../datasets/iiif-schema/manifest-shapes.ttl'));
-const MANIFEST_SHAPE_ID = rdfxjson.Rdf.namedNode('http://iiif.io/api/presentation/2#Manifest');
+const MANIFEST_SHAPE_ID = Ram.Rdf.namedNode('http://iiif.io/api/presentation/2#Manifest');
 
 const PREFIXES: { [prefix: string]: string } = {
   "sc": "http://iiif.io/api/presentation/2#",
@@ -46,11 +46,11 @@ interface BenchmarkedManifest {
   readonly manifestName: string;
   readonly fileName: string;
   readonly jsonldFlatten: object;
-  readonly quads: rdfxjson.Rdf.Quad[];
+  readonly quads: Ram.Rdf.Quad[];
   jsonldFramed?: object;
   jsonldFlattenQuadCount?: number;
-  rdfxjsonFramed?: object;
-  rdfxjsonFlattenQuadCount?: number;
+  ramFramed?: object;
+  ramFlattenQuadCount?: number;
 }
 
 async function main() {
@@ -95,41 +95,41 @@ async function main() {
 async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
   const outDir = path.join(__dirname, '../out');
   await Util.makeDirectoryIfNotExists(outDir);
-  await Util.makeDirectoryIfNotExists(path.join(outDir, 'frame-rdfxjson'));
+  await Util.makeDirectoryIfNotExists(path.join(outDir, 'frame-ram'));
   await Util.makeDirectoryIfNotExists(path.join(outDir, 'frame-jsonld'));
-  await Util.makeDirectoryIfNotExists(path.join(outDir, 'flatten-rdfxjson'));
+  await Util.makeDirectoryIfNotExists(path.join(outDir, 'flatten-ram'));
   await Util.makeDirectoryIfNotExists(path.join(outDir, 'flatten-jsonld'));
 
   for (const manifest of manifests) {
     console.log('Testing manifest: ', manifest.manifestName, `(${manifest.quads.length} quads)`);
     try {
       let foundSoultion = false;
-      const startRxjTime = performance.now();
-      const frameResults = rdfxjson.frame({
+      const startRamTime = performance.now();
+      const frameResults = Ram.frame({
         rootShape: MANIFEST_SHAPE_ID,
         shapes: SHAPES,
         triples: manifest.quads
       });
       for (const {value} of frameResults) {
-        const endRxjTime = performance.now();
+        const endRamTime = performance.now();
         if (foundSoultion) {
-          console.warn('[rdfxjson] found multiple solutions');
+          console.warn('[ram] found multiple solutions');
           break;
         }
         foundSoultion = true;
-        manifest.rdfxjsonFramed = value as object;
-        // console.log('[rdfxjson] framed:', toJson(value));
-        console.log(`[rdfxjson] frame OK in ${Math.round(endRxjTime - startRxjTime)} ms`);
+        manifest.ramFramed = value as object;
+        // console.log('[ram] framed:', toJson(value));
+        console.log(`[ram] frame OK in ${Math.round(endRamTime - startRamTime)} ms`);
         const json = Util.toJson(value);
 
         await Util.writeFile(
-          path.join(__dirname, '../out/frame-rdfxjson', `${manifest.manifestName}.json`),
+          path.join(__dirname, '../out/frame-ram', `${manifest.manifestName}.json`),
           json,
           {encoding: 'utf8'}
         );
       }
     } catch (err) {
-      console.error('[rdfxjson] frame error:', err);
+      console.error('[ram] frame error:', err);
     }
 
     try {
@@ -159,20 +159,20 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
     }
 
     try {
-      const quads = Array.from(rdfxjson.flatten({
+      const quads = Array.from(Ram.flatten({
         rootShape: MANIFEST_SHAPE_ID,
         shapes: SHAPES,
-        value: manifest.rdfxjsonFramed,
+        value: manifest.ramFramed,
       }));
-      manifest.rdfxjsonFlattenQuadCount = quads.length;
+      manifest.ramFlattenQuadCount = quads.length;
       await Util.writeQuadsToTurtle(
-        path.join(__dirname, '../out/flatten-rdfxjson', `${manifest.manifestName}.ttl`),
+        path.join(__dirname, '../out/flatten-ram', `${manifest.manifestName}.ttl`),
         quads,
         PREFIXES
       );
-      console.log(`[rdfxjon] flatten OK (${manifest.rdfxjsonFlattenQuadCount} quads)`);
+      console.log(`[ram] flatten OK (${manifest.ramFlattenQuadCount} quads)`);
     } catch (err) {
-      console.error('[rdfxjson] flatten error:', err);
+      console.error('[ram] flatten error:', err);
     }
 
     try {
@@ -228,9 +228,9 @@ async function benchmarkFrame(manifests: ReadonlyArray<BenchmarkedManifest>) {
         }
       },
       {
-        name: `rdfxjson`,
+        name: `ram`,
         benchmark: async () => {
-          const frameResults = rdfxjson.frame({
+          const frameResults = Ram.frame({
             rootShape: MANIFEST_SHAPE_ID,
             shapes: SHAPES,
             triples: manifest.quads,
@@ -262,12 +262,12 @@ async function benchmarkFlatten(manifests: ReadonlyArray<BenchmarkedManifest>) {
         }
       },
       {
-        name: `rdfxjson`,
+        name: `ram`,
         benchmark: async () => {
-          const quads = rdfxjson.flatten({
+          const quads = Ram.flatten({
             rootShape: MANIFEST_SHAPE_ID,
             shapes: SHAPES,
-            value: manifest.rdfxjsonFramed,
+            value: manifest.ramFramed,
           });
           for (const quad of quads) {
             // pass

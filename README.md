@@ -1,10 +1,10 @@
-# Performance benchmark for rdfxjson
+# Performance benchmark for RAM (RDF ADT Mapping)
 
-This is a performance benchmark for [rdfxjson](https://github.com/AlexeyMz/rdfxjson) library.
+This is a performance benchmark for [ram-shapes](https://github.com/AlexeyMz/ram-shapes) library.
 
 ## Installation
 1. Run `npm install` to install dependencies.
-2. *(Optional)* Execute `npm link` in the checked out copy of the rdfxjson library and `npm link rdfxjson` to benchmark the latest library version.
+2. *(Optional)* Execute `npm link` in the checked out copy of the ram-shapes library and `npm link ram-shapes` to benchmark the latest library version.
 3. Run `npm run build` to compile the code.
 
 ## Usage

@@ -1,5 +1,5 @@
 import * as path from 'path';
-import * as rdfxjson from 'rdfxjson';
+import * as Ram from 'ram-shapes';
 
 import * as JsonLd from './jsonld';
 import { runBenchmark } from './benchmark';
@@ -7,7 +7,7 @@ import { rdf, rdfs, xsd, oa } from './namespaces';
 import { readQuadsFromTurtle, toJson, readShapes } from './util';
 
 const QUADS = readQuadsFromTurtle(path.join(__dirname, '../datasets/annotation/graph.ttl'));
-const SHAPES = readShapes(path.join(__dirname, '../datasets/annotation/rxj-shapes.ttl'));
+const SHAPES = readShapes(path.join(__dirname, '../datasets/annotation/ram-shapes.ttl'));
 const JSONLD_CONTEXT = require('../datasets/annotation/jsonld-context.json');
 const JSONLD_FRAME = require('../datasets/annotation/jsonld-frame.json');
 
@@ -29,12 +29,12 @@ async function main() {
     console.log('[JSON-LD] compacted:', toJson(jsonldCompacted));
   }
 
-  let rxjFramed: any;
+  let ramFramed: any;
   {
-    const triples = QUADS as rdfxjson.Rdf.Quad[];
-    for (const {value} of rdfxjson.frame({rootShape: oa.Annotation, shapes: SHAPES, triples})) {
-      rxjFramed = value;
-      console.log('[rdfxjson] framed:', toJson(rxjFramed));
+    const triples = QUADS as Ram.Rdf.Quad[];
+    for (const {value} of Ram.frame({rootShape: oa.Annotation, shapes: SHAPES, triples})) {
+      ramFramed = value;
+      console.log('[RAM] framed:', toJson(ramFramed));
     }
   }
 
@@ -48,10 +48,10 @@ async function main() {
       }
     },
     {
-      name: '[OA] frame rdfxjson',
+      name: '[OA] frame RAM',
       benchmark: async () => {
-        const triples = QUADS as rdfxjson.Rdf.Quad[];
-        for (const {value: framed} of rdfxjson.frame({rootShape: oa.Annotation, shapes: SHAPES, triples})) {
+        const triples = QUADS as Ram.Rdf.Quad[];
+        for (const {value: framed} of Ram.frame({rootShape: oa.Annotation, shapes: SHAPES, triples})) {
           // pass
         }
       }
@@ -66,16 +66,14 @@ async function main() {
       }
     },
     {
-      name: '[OA] flatten rdfxjson',
+      name: '[OA] flatten RAM',
       benchmark: async () => {
-        for (const triple of rdfxjson.flatten({rootShape: oa.Annotation, shapes: SHAPES, value: rxjFramed})) {
+        for (const triple of Ram.flatten({rootShape: oa.Annotation, shapes: SHAPES, value: ramFramed})) {
           // pass
         }
       }
     }
   ]);
 }
-
-
 
 main();

@@ -33,11 +33,11 @@ async function writeChartData(stats: BenchmarkGroup[], statName: string, targetN
     index++;
   }
 
-  await Util.makeDirectoryIfNotExists(path.join(__dirname, `../../overleaf-rdfxjson/stats`));
+  await Util.makeDirectoryIfNotExists(path.join(__dirname, `../../overleaf-ram/stats`));
   await Util.writeFile(
     path.join(
       __dirname,
-      `../../overleaf-rdfxjson/stats`,
+      `../../overleaf-ram/stats`,
       `${statName}-${targetName}.dat`
     ),
     data,
@@ -53,10 +53,10 @@ function compareOnAverage(stats: BenchmarkGroup[], statName: string) {
       continue;
     }
     count++;
-    const rdfxjsonEvent = group.events.find(e => e.name === 'rdfxjson')!;
+    const ramEvent = group.events.find(e => e.name === 'ram')!;
     for (const event of group.events) {
       let total = relationTotals.get(event.name) || 0;
-      total += (event.stats.mean - rdfxjsonEvent.stats.mean) / rdfxjsonEvent.stats.mean;
+      total += (event.stats.mean - ramEvent.stats.mean) / ramEvent.stats.mean;
       relationTotals.set(event.name, total);
     }
   }
@@ -64,15 +64,15 @@ function compareOnAverage(stats: BenchmarkGroup[], statName: string) {
   for (const [targetName, relationTotal] of relationTotals) {
     const averageRelation = relationTotal / count;
     console.log(
-      `'${statName}' rdfxjson performance relative to ${targetName} ` +
+      `'${statName}' ram performance relative to ${targetName} ` +
       `is ${(averageRelation * 100).toFixed(2)}%`
     );
   }
 }
 
 async function main() {
-  await writeLatexChart('frame', ['jsonld', 'jsonld-plus-compact', 'rdfxjson']);
-  await writeLatexChart('flatten', ['jsonld', 'rdfxjson']);
+  await writeLatexChart('frame', ['jsonld', 'jsonld-plus-compact', 'ram']);
+  await writeLatexChart('flatten', ['jsonld', 'ram']);
 }
 
 main();

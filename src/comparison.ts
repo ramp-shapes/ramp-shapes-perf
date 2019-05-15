@@ -1,5 +1,5 @@
 import * as path from 'path';
-import * as rdfxjson from 'rdfxjson';
+import * as Ram from 'ram-shapes';
 import * as SparqlJs from 'sparqljs';
 
 import * as JsonLd from './jsonld';
@@ -44,27 +44,27 @@ const documentLoader = JsonLd.makeDocumentLoader({
     {encoding: 'utf8'}
   );
 
-  const rootShape = rdfxjson.Rdf.namedNode(PREFIXES['ex'] + 'Annotation');
-  const query = rdfxjson.generateQuery({
+  const rootShape = Ram.Rdf.namedNode(PREFIXES['ex'] + 'Annotation');
+  const query = Ram.generateQuery({
     rootShape,
     shapes: SHAPES,
     prefixes: PREFIXES,
   });
   const generator = new SparqlJs.Generator();
   await Util.writeFile(
-    path.join(outDir, `rdfxjson-query.sparql`),
+    path.join(outDir, `ram-query.sparql`),
     generator.stringify(query),
     {encoding: 'utf8'}
   );
 
-  const iterator = rdfxjson.frame({
+  const iterator = Ram.frame({
     rootShape,
     shapes: SHAPES,
-    triples: DATA as rdfxjson.Rdf.Quad[],
+    triples: DATA as Ram.Rdf.Quad[],
   });
   for (const {value} of iterator) {
     await Util.writeFile(
-      path.join(outDir, `rdfxjson-framed.json`),
+      path.join(outDir, `ram-framed.json`),
       Util.toJson(value),
       {encoding: 'utf8'}
     );
