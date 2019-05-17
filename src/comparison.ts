@@ -68,5 +68,11 @@ const documentLoader = JsonLd.makeDocumentLoader({
       Util.toJson(value),
       {encoding: 'utf8'}
     );
+    const quads = Ram.flatten({rootShape, shapes: SHAPES, value});
+    await Util.writeQuadsToTurtle(
+      path.join(outDir, `ram-flattened.ttl`),
+      quads,
+      {...PREFIXES, "": "http://example.com/data/"}
+    );
   }
 })();
