@@ -21,5 +21,4 @@ After executing installation steps, run one of the following entry points:
 After running `dist/iiif.js` you can manually inspect frame and flatten operation results for each test case.
 
 ## References
-A publication which describes this work is currently under review at 
-Semantics-2019 conference.
+A publication which describes this work is currently under review at MTSR Conference 2019.
