@@ -36,7 +36,14 @@ sc:Manifest a :ObjectShape;
     :property [
         :name "license";
         :path ([ :predicate dcterms:rights ]);
-        :shape [ a :OptionalShape; :item [ a :LiteralShape; :termDatatype xsd:string ] ]
+        :shape [
+            a :OptionalShape;
+            :item [
+                a :UnionShape;
+                :variant [ a :ResourceShape ],
+                    [ a :LiteralShape; :termDatatype xsd:string ]
+            ]
+        ]
     ];
     :property [
         :name "sequences";
@@ -62,7 +69,11 @@ sc:Manifest a :ObjectShape;
             :item [
                 a :ObjectShape;
                 :property _:idProperty;
-                :property _:serviceProperty
+                :property [
+                    :name "service";
+                    :path ([ :predicate svcs:has_service ]);
+                    :shape [ a :OptionalShape; :item _:service ]
+                ]
             ]
         ]
     ].
@@ -238,7 +249,14 @@ _:metadataProperty :name "metadata";
     :shape [ a :OptionalShape; :item [ a :ListShape; :item _:metadataItem ] ].
 
 _:metadataItem a :ObjectShape;
-    :typeProperty _:labelProperty;
+    :property [
+        :name "label";
+        :path ([ :predicate rdfs:label ]);
+        :shape [
+            a :SetShape;
+            :item [ a :LiteralShape; :termDatatype xsd:string ]
+        ]
+    ];
     :property [
         :name "value";
         :path ([ :predicate rdf:value ]);

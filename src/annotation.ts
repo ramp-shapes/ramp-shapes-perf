@@ -31,8 +31,8 @@ async function main() {
 
   let ramFramed: any;
   {
-    const triples = QUADS as Ram.Rdf.Quad[];
-    for (const {value} of Ram.frame({rootShape: oa.Annotation, shapes: SHAPES, triples})) {
+    const dataset = Ram.Rdf.dataset(QUADS as Ram.Rdf.Quad[]);
+    for (const {value} of Ram.frame({rootShape: oa.Annotation, shapes: SHAPES, dataset})) {
       ramFramed = value;
       console.log('[RAM] framed:', toJson(ramFramed));
     }
@@ -50,8 +50,8 @@ async function main() {
     {
       name: '[OA] frame RAM',
       benchmark: async () => {
-        const triples = QUADS as Ram.Rdf.Quad[];
-        for (const {value: framed} of Ram.frame({rootShape: oa.Annotation, shapes: SHAPES, triples})) {
+        const dataset = Ram.Rdf.dataset(QUADS as Ram.Rdf.Quad[]);
+        for (const {value: framed} of Ram.frame({rootShape: oa.Annotation, shapes: SHAPES, dataset})) {
           // pass
         }
       }

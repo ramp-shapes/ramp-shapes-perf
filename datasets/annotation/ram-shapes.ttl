@@ -45,7 +45,8 @@ oa:Annotation a :ObjectShape;
                 :path ([ :predicate rdfs:label ]);
                 :shape [
                     a :MapShape;
-                    :key [ :shape _:bodyLabel; :termPart "language" ];
+                    :mapKey [ :shape _:bodyLabel; :termPart :TermLanguage ];
+                    :mapValue [ :shape _:bodyLabel; :termPart :TermValue ];
                     :item _:bodyLabel
                 ]
             ]

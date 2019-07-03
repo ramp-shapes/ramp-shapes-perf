@@ -47,6 +47,7 @@ interface BenchmarkedManifest {
   readonly fileName: string;
   readonly jsonldFlatten: object;
   readonly quads: Ram.Rdf.Quad[];
+  readonly dataset: Ram.Rdf.Dataset;
   jsonldFramed?: object;
   jsonldFlattenQuadCount?: number;
   ramFramed?: object;
@@ -70,7 +71,13 @@ async function main() {
         {documentLoader: DOCUMENT_LOADER}
       );
       const quads = await JsonLd.toRdf(jsonldDocument, {documentLoader: DOCUMENT_LOADER});
-      manifest = {manifestName, fileName, jsonldFlatten, quads};
+      manifest = {
+        manifestName,
+        fileName,
+        jsonldFlatten,
+        quads,
+        dataset: Ram.Rdf.dataset(quads),
+      };
       manifests.push(manifest);
     } catch (err) {
       console.warn('Skipping ', fileName);
@@ -108,7 +115,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
       const frameResults = Ram.frame({
         rootShape: MANIFEST_SHAPE_ID,
         shapes: SHAPES,
-        triples: manifest.quads
+        dataset: manifest.dataset,
       });
       for (const {value} of frameResults) {
         const endRamTime = performance.now();
@@ -233,7 +240,7 @@ async function benchmarkFrame(manifests: ReadonlyArray<BenchmarkedManifest>) {
           const frameResults = Ram.frame({
             rootShape: MANIFEST_SHAPE_ID,
             shapes: SHAPES,
-            triples: manifest.quads,
+            dataset: manifest.dataset,
           });
           for (const {value} of frameResults) {
             // pass

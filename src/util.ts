@@ -53,5 +53,5 @@ export function toJson(match: unknown): string {
 
 export function readShapes(path: string): Shape[] {
   const quads = readQuadsFromTurtle(path);
-  return frameShapes(quads as Rdf.Quad[]);
+  return frameShapes(Rdf.dataset(quads as Rdf.Quad[]));
 }

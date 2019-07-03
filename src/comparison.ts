@@ -60,7 +60,7 @@ const documentLoader = JsonLd.makeDocumentLoader({
   const iterator = Ram.frame({
     rootShape,
     shapes: SHAPES,
-    triples: DATA as Ram.Rdf.Quad[],
+    dataset: Ram.Rdf.dataset(DATA as Ram.Rdf.Quad[]),
   });
   for (const {value} of iterator) {
     await Util.writeFile(
