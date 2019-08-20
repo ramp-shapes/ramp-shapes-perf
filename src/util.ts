@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as N3 from 'n3';
-import { Rdf, Shape, frameShapes } from 'ram-shapes';
+import { Rdf, Shape, frameShapes } from 'ramp-shapes';
 import { promisify } from 'util';
 
 export const exists = promisify(fs.exists);

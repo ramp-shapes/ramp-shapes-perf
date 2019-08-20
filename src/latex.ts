@@ -33,11 +33,11 @@ async function writeChartData(stats: BenchmarkGroup[], statName: string, targetN
     index++;
   }
 
-  await Util.makeDirectoryIfNotExists(path.join(__dirname, `../../overleaf-ram/stats`));
+  await Util.makeDirectoryIfNotExists(path.join(__dirname, `../../overleaf-ramp/stats`));
   await Util.writeFile(
     path.join(
       __dirname,
-      `../../overleaf-ram/stats`,
+      `../../overleaf-ramp/stats`,
       `${statName}-${targetName}.dat`
     ),
     data,
@@ -53,7 +53,7 @@ function compareOnAverage(stats: BenchmarkGroup[], statName: string) {
       continue;
     }
     count++;
-    const ramEvent = group.events.find(e => e.name === 'ram')!;
+    const ramEvent = group.events.find(e => e.name === 'ramp')!;
     for (const event of group.events) {
       let total = relationTotals.get(event.name) || 0;
       total += (event.stats.mean - ramEvent.stats.mean) / ramEvent.stats.mean;
@@ -64,15 +64,15 @@ function compareOnAverage(stats: BenchmarkGroup[], statName: string) {
   for (const [targetName, relationTotal] of relationTotals) {
     const averageRelation = relationTotal / count;
     console.log(
-      `'${statName}' ram performance relative to ${targetName} ` +
+      `'${statName}' ramp performance relative to ${targetName} ` +
       `is ${(averageRelation * 100).toFixed(2)}%`
     );
   }
 }
 
 async function main() {
-  await writeLatexChart('frame', ['jsonld', 'jsonld-plus-compact', 'ram']);
-  await writeLatexChart('flatten', ['jsonld', 'ram']);
+  await writeLatexChart('frame', ['jsonld', 'jsonld-plus-compact', 'ramp']);
+  await writeLatexChart('flatten', ['jsonld', 'ramp']);
 }
 
 main();

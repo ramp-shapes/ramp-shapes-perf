@@ -1,5 +1,5 @@
 import * as path from 'path';
-import * as Ram from 'ram-shapes';
+import * as Ramp from 'ramp-shapes';
 import * as SparqlJs from 'sparqljs';
 
 import * as JsonLd from './jsonld';
@@ -44,33 +44,33 @@ const documentLoader = JsonLd.makeDocumentLoader({
     {encoding: 'utf8'}
   );
 
-  const rootShape = Ram.Rdf.namedNode(PREFIXES['ex'] + 'Annotation');
-  const query = Ram.generateQuery({
+  const rootShape = Ramp.Rdf.namedNode(PREFIXES['ex'] + 'Annotation');
+  const query = Ramp.generateQuery({
     rootShape,
     shapes: SHAPES,
     prefixes: PREFIXES,
   });
   const generator = new SparqlJs.Generator();
   await Util.writeFile(
-    path.join(outDir, `ram-query.sparql`),
+    path.join(outDir, `ramp-query.sparql`),
     generator.stringify(query),
     {encoding: 'utf8'}
   );
 
-  const iterator = Ram.frame({
+  const iterator = Ramp.frame({
     rootShape,
     shapes: SHAPES,
-    dataset: Ram.Rdf.dataset(DATA as Ram.Rdf.Quad[]),
+    dataset: Ramp.Rdf.dataset(DATA as Ramp.Rdf.Quad[]),
   });
   for (const {value} of iterator) {
     await Util.writeFile(
-      path.join(outDir, `ram-framed.json`),
+      path.join(outDir, `ramp-framed.json`),
       Util.toJson(value),
       {encoding: 'utf8'}
     );
-    const quads = Ram.flatten({rootShape, shapes: SHAPES, value});
+    const quads = Ramp.flatten({rootShape, shapes: SHAPES, value});
     await Util.writeQuadsToTurtle(
-      path.join(outDir, `ram-flattened.ttl`),
+      path.join(outDir, `ramp-flattened.ttl`),
       quads,
       {...PREFIXES, "": "http://example.com/data/"}
     );

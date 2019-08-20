@@ -1,5 +1,5 @@
 import * as path from 'path';
-import * as Ram from 'ram-shapes';
+import * as Ramp from 'ramp-shapes';
 
 import * as JsonLd from './jsonld';
 import { runBenchmark } from './benchmark';
@@ -7,7 +7,7 @@ import { rdf, rdfs, xsd, oa } from './namespaces';
 import { readQuadsFromTurtle, toJson, readShapes } from './util';
 
 const QUADS = readQuadsFromTurtle(path.join(__dirname, '../datasets/annotation/graph.ttl'));
-const SHAPES = readShapes(path.join(__dirname, '../datasets/annotation/ram-shapes.ttl'));
+const SHAPES = readShapes(path.join(__dirname, '../datasets/annotation/shapes.ttl'));
 const JSONLD_CONTEXT = require('../datasets/annotation/jsonld-context.json');
 const JSONLD_FRAME = require('../datasets/annotation/jsonld-frame.json');
 
@@ -31,10 +31,10 @@ async function main() {
 
   let ramFramed: any;
   {
-    const dataset = Ram.Rdf.dataset(QUADS as Ram.Rdf.Quad[]);
-    for (const {value} of Ram.frame({rootShape: oa.Annotation, shapes: SHAPES, dataset})) {
+    const dataset = Ramp.Rdf.dataset(QUADS as Ramp.Rdf.Quad[]);
+    for (const {value} of Ramp.frame({rootShape: oa.Annotation, shapes: SHAPES, dataset})) {
       ramFramed = value;
-      console.log('[RAM] framed:', toJson(ramFramed));
+      console.log('[RAMP] framed:', toJson(ramFramed));
     }
   }
 
@@ -48,10 +48,10 @@ async function main() {
       }
     },
     {
-      name: '[OA] frame RAM',
+      name: '[OA] frame RAMP',
       benchmark: async () => {
-        const dataset = Ram.Rdf.dataset(QUADS as Ram.Rdf.Quad[]);
-        for (const {value: framed} of Ram.frame({rootShape: oa.Annotation, shapes: SHAPES, dataset})) {
+        const dataset = Ramp.Rdf.dataset(QUADS as Ramp.Rdf.Quad[]);
+        for (const {value: framed} of Ramp.frame({rootShape: oa.Annotation, shapes: SHAPES, dataset})) {
           // pass
         }
       }
@@ -66,9 +66,9 @@ async function main() {
       }
     },
     {
-      name: '[OA] flatten RAM',
+      name: '[OA] flatten RAMP',
       benchmark: async () => {
-        for (const triple of Ram.flatten({rootShape: oa.Annotation, shapes: SHAPES, value: ramFramed})) {
+        for (const triple of Ramp.flatten({rootShape: oa.Annotation, shapes: SHAPES, value: ramFramed})) {
           // pass
         }
       }

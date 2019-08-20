@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { performance } from 'perf_hooks';
-import * as Ram from 'ram-shapes';
+import * as Ramp from 'ramp-shapes';
 
 import * as JsonLd from './jsonld';
 import * as Util from './util';
@@ -13,7 +13,7 @@ const JSONLD_IIIF_IMAGE_CONTEXT_V2 = require('../datasets/iiif-schema/image-cont
 const JSONLD_IIIF_FRAME = require('../datasets/iiif-schema/manifest-frame.json');
 
 const SHAPES = Util.readShapes(path.join(__dirname, '../datasets/iiif-schema/manifest-shapes.ttl'));
-const MANIFEST_SHAPE_ID = Ram.Rdf.namedNode('http://iiif.io/api/presentation/2#Manifest');
+const MANIFEST_SHAPE_ID = Ramp.Rdf.namedNode('http://iiif.io/api/presentation/2#Manifest');
 
 const PREFIXES: { [prefix: string]: string } = {
   "sc": "http://iiif.io/api/presentation/2#",
@@ -46,12 +46,12 @@ interface BenchmarkedManifest {
   readonly manifestName: string;
   readonly fileName: string;
   readonly jsonldFlatten: object;
-  readonly quads: Ram.Rdf.Quad[];
-  readonly dataset: Ram.Rdf.Dataset;
+  readonly quads: Ramp.Rdf.Quad[];
+  readonly dataset: Ramp.Rdf.Dataset;
   jsonldFramed?: object;
   jsonldFlattenQuadCount?: number;
-  ramFramed?: object;
-  ramFlattenQuadCount?: number;
+  rampFramed?: object;
+  rampFlattenQuadCount?: number;
 }
 
 async function main() {
@@ -76,7 +76,7 @@ async function main() {
         fileName,
         jsonldFlatten,
         quads,
-        dataset: Ram.Rdf.dataset(quads),
+        dataset: Ramp.Rdf.dataset(quads),
       };
       manifests.push(manifest);
     } catch (err) {
@@ -102,9 +102,9 @@ async function main() {
 async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
   const outDir = path.join(__dirname, '../out');
   await Util.makeDirectoryIfNotExists(outDir);
-  await Util.makeDirectoryIfNotExists(path.join(outDir, 'frame-ram'));
+  await Util.makeDirectoryIfNotExists(path.join(outDir, 'frame-ramp'));
   await Util.makeDirectoryIfNotExists(path.join(outDir, 'frame-jsonld'));
-  await Util.makeDirectoryIfNotExists(path.join(outDir, 'flatten-ram'));
+  await Util.makeDirectoryIfNotExists(path.join(outDir, 'flatten-ramp'));
   await Util.makeDirectoryIfNotExists(path.join(outDir, 'flatten-jsonld'));
 
   for (const manifest of manifests) {
@@ -112,7 +112,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
     try {
       let foundSoultion = false;
       const startRamTime = performance.now();
-      const frameResults = Ram.frame({
+      const frameResults = Ramp.frame({
         rootShape: MANIFEST_SHAPE_ID,
         shapes: SHAPES,
         dataset: manifest.dataset,
@@ -120,23 +120,23 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
       for (const {value} of frameResults) {
         const endRamTime = performance.now();
         if (foundSoultion) {
-          console.warn('[ram] found multiple solutions');
+          console.warn('[ramp] found multiple solutions');
           break;
         }
         foundSoultion = true;
-        manifest.ramFramed = value as object;
-        // console.log('[ram] framed:', toJson(value));
-        console.log(`[ram] frame OK in ${Math.round(endRamTime - startRamTime)} ms`);
+        manifest.rampFramed = value as object;
+        // console.log('[ramp] framed:', toJson(value));
+        console.log(`[ramp] frame OK in ${Math.round(endRamTime - startRamTime)} ms`);
         const json = Util.toJson(value);
 
         await Util.writeFile(
-          path.join(__dirname, '../out/frame-ram', `${manifest.manifestName}.json`),
+          path.join(__dirname, '../out/frame-ramp', `${manifest.manifestName}.json`),
           json,
           {encoding: 'utf8'}
         );
       }
     } catch (err) {
-      console.error('[ram] frame error:', err);
+      console.error('[ramp] frame error:', err);
     }
 
     try {
@@ -166,20 +166,20 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
     }
 
     try {
-      const quads = Array.from(Ram.flatten({
+      const quads = Array.from(Ramp.flatten({
         rootShape: MANIFEST_SHAPE_ID,
         shapes: SHAPES,
-        value: manifest.ramFramed,
+        value: manifest.rampFramed,
       }));
-      manifest.ramFlattenQuadCount = quads.length;
+      manifest.rampFlattenQuadCount = quads.length;
       await Util.writeQuadsToTurtle(
-        path.join(__dirname, '../out/flatten-ram', `${manifest.manifestName}.ttl`),
+        path.join(__dirname, '../out/flatten-ramp', `${manifest.manifestName}.ttl`),
         quads,
         PREFIXES
       );
-      console.log(`[ram] flatten OK (${manifest.ramFlattenQuadCount} quads)`);
+      console.log(`[ramp] flatten OK (${manifest.rampFlattenQuadCount} quads)`);
     } catch (err) {
-      console.error('[ram] flatten error:', err);
+      console.error('[ramp] flatten error:', err);
     }
 
     try {
@@ -235,9 +235,9 @@ async function benchmarkFrame(manifests: ReadonlyArray<BenchmarkedManifest>) {
         }
       },
       {
-        name: `ram`,
+        name: `ramp`,
         benchmark: async () => {
-          const frameResults = Ram.frame({
+          const frameResults = Ramp.frame({
             rootShape: MANIFEST_SHAPE_ID,
             shapes: SHAPES,
             dataset: manifest.dataset,
@@ -269,12 +269,12 @@ async function benchmarkFlatten(manifests: ReadonlyArray<BenchmarkedManifest>) {
         }
       },
       {
-        name: `ram`,
+        name: `ramp`,
         benchmark: async () => {
-          const quads = Ram.flatten({
+          const quads = Ramp.flatten({
             rootShape: MANIFEST_SHAPE_ID,
             shapes: SHAPES,
-            value: manifest.ramFramed,
+            value: manifest.rampFramed,
           });
           for (const quad of quads) {
             // pass

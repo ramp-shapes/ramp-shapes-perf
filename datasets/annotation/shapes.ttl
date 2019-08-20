@@ -2,7 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix oa: <http://www.w3.org/ns/oa#>.
-@prefix : <http://ram-shapes.github.io/schema#>.
+@prefix : <http://ramp-shapes.github.io/schema#>.
 
 oa:Annotation a :ObjectShape;
     :typeProperty [

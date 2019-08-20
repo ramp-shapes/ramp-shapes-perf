@@ -1,10 +1,10 @@
-# Performance benchmark for RAM Shapes library
+# Performance benchmark for RAMP Shapes library
 
-This is a performance benchmark for [ram-shapes](https://github.com/AlexeyMz/ram-shapes) library.
+This is a performance benchmark for [ramp-shapes](https://github.com/ramp-shapes/ramp-shapes) library.
 
 ## Installation
 1. Run `npm install` to install dependencies.
-2. *(Optional)* Execute `npm link` in the checked out copy of the ram-shapes library and `npm link ram-shapes` to benchmark the latest library version.
+2. *(Optional)* Execute `npm link` in the checked out copy of the ramp-shapes library and `npm link ramp-shapes` to benchmark the latest library version.
 3. Run `npm run build` to compile the code.
 
 ## Usage

@@ -1,11 +1,15 @@
 {
-  "name": "ram-shapes-perf",
-  "version": "0.3.0",
+  "name": "ramp-shapes-perf",
+  "version": "0.5.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexeyMz/ramp-shapes-perf.git"
   },
   "author": "Alexey Morozov <alexey.morozov@live.ru>",
   "license": "MIT",
@@ -15,7 +19,7 @@
     "benchmark": "^2.1.4",
     "jsonld": "^1.6.0",
     "n3": "^1.1.0",
-    "ram-shapes": "^0.4.0",
+    "ramp-shapes": "^0.5.0",
     "sparqljs": "^2.2.3"
   },
   "devDependencies": {
