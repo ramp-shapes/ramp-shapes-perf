@@ -1,4 +1,4 @@
-# Performance benchmark for RAMP Shapes library
+# Performance benchmark for RAMP Shapes library ([see paper](https://www.researchgate.net/publication/337724413_RAMP_Shapes_Declarative_RDF_ADT_Mapping))
 
 This is a performance benchmark for [ramp-shapes](https://github.com/ramp-shapes/ramp-shapes) library.
 
@@ -21,4 +21,7 @@ After executing installation steps, run one of the following entry points:
 After running `dist/iiif.js` you can manually inspect frame and flatten operation results for each test case.
 
 ## References
-A publication which describes this work is currently under review at MTSR Conference 2019.
+
+Morozov A., Wohlgenannt G., Mouromtsev D., Pavlov D., Emelyanov Y. (2019) RAMP Shapes: Declarative RDF ↔ ADT Mapping. In: Garoufallou E., Fallucchi F., William De Luca E. (eds) Metadata and Semantic Research. MTSR 2019. Communications in Computer and Information Science, vol 1057. Springer, Cham
+
+https://link.springer.com/chapter/10.1007/978-3-030-36599-8_4
