@@ -13,7 +13,8 @@ const JSONLD_IIIF_IMAGE_CONTEXT_V2 = require('../datasets/iiif-schema/image-cont
 const JSONLD_IIIF_FRAME = require('../datasets/iiif-schema/manifest-frame.json');
 
 const SHAPES = Util.readShapes(path.join(__dirname, '../datasets/iiif-schema/manifest-shapes.ttl'));
-const MANIFEST_SHAPE_ID = Ramp.Rdf.namedNode('http://iiif.io/api/presentation/2#Manifest');
+const MANIFEST_SHAPE_ID = Ramp.Rdf.DefaultDataFactory.namedNode('http://iiif.io/api/presentation/2#Manifest');
+const MANIFEST_SHAPE = SHAPES.find(s => Ramp.Rdf.equalTerms(s.id, MANIFEST_SHAPE_ID))!;
 
 const PREFIXES: { [prefix: string]: string } = {
   "sc": "http://iiif.io/api/presentation/2#",
@@ -112,11 +113,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
     try {
       let foundSoultion = false;
       const startRamTime = performance.now();
-      const frameResults = Ramp.frame({
-        rootShape: MANIFEST_SHAPE_ID,
-        shapes: SHAPES,
-        dataset: manifest.dataset,
-      });
+      const frameResults = Ramp.frame({shape: MANIFEST_SHAPE, dataset: manifest.dataset});
       for (const {value} of frameResults) {
         const endRamTime = performance.now();
         if (foundSoultion) {
@@ -166,11 +163,7 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
     }
 
     try {
-      const quads = Array.from(Ramp.flatten({
-        rootShape: MANIFEST_SHAPE_ID,
-        shapes: SHAPES,
-        value: manifest.rampFramed,
-      }));
+      const quads = Array.from(Ramp.flatten({shape: MANIFEST_SHAPE, value: manifest.rampFramed}));
       manifest.rampFlattenQuadCount = quads.length;
       await Util.writeQuadsToTurtle(
         path.join(__dirname, '../out/flatten-ramp', `${manifest.manifestName}.ttl`),
@@ -237,11 +230,7 @@ async function benchmarkFrame(manifests: ReadonlyArray<BenchmarkedManifest>) {
       {
         name: `ramp`,
         benchmark: async () => {
-          const frameResults = Ramp.frame({
-            rootShape: MANIFEST_SHAPE_ID,
-            shapes: SHAPES,
-            dataset: manifest.dataset,
-          });
+          const frameResults = Ramp.frame({shape: MANIFEST_SHAPE, dataset: manifest.dataset});
           for (const {value} of frameResults) {
             // pass
           }
@@ -271,11 +260,7 @@ async function benchmarkFlatten(manifests: ReadonlyArray<BenchmarkedManifest>) {
       {
         name: `ramp`,
         benchmark: async () => {
-          const quads = Ramp.flatten({
-            rootShape: MANIFEST_SHAPE_ID,
-            shapes: SHAPES,
-            value: manifest.rampFramed,
-          });
+          const quads = Ramp.flatten({shape: MANIFEST_SHAPE, value: manifest.rampFramed});
           for (const quad of quads) {
             // pass
           }

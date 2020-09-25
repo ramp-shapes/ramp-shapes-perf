@@ -15,7 +15,7 @@
 sc:Manifest a :ObjectShape;
     :typeProperty [
         :name "@type";
-        :path ([ :predicate rdf:type ]);
+        :path rdf:type;
         :shape [ a :ResourceShape; :termValue sc:Manifest ]
     ];
     :property _:idProperty;
@@ -25,17 +25,17 @@ sc:Manifest a :ObjectShape;
     :property _:viewingHintProperty;
     :property [
         :name "attribution";
-        :path ([ :predicate sc:attributionLabel ]);
+        :path sc:attributionLabel;
         :shape [ a :OptionalShape; :item [ a :LiteralShape; :termDatatype xsd:string ] ]
     ];
     :property [
         :name "description";
-        :path ([ :predicate dc:description ]);
+        :path dc:description;
         :shape [ a :OptionalShape; :item [ a :LiteralShape; :termDatatype xsd:string ] ]
     ];
     :property [
         :name "license";
-        :path ([ :predicate dcterms:rights ]);
+        :path dcterms:rights;
         :shape [
             a :OptionalShape;
             :item [
@@ -47,23 +47,23 @@ sc:Manifest a :ObjectShape;
     ];
     :property [
         :name "sequences";
-        :path ([ :predicate sc:hasSequences ]);
+        :path sc:hasSequences;
         :shape [ a :ListShape; :item sc:Sequence ]
     ];
     :property [
         :name "structures";
-        :path ([ :predicate sc:hasRanges ]);
+        :path sc:hasRanges;
         :shape [ a :OptionalShape; :item [ a :ListShape; :item sc:Range ] ]
     ];
     :property [
         :name "startCanvas";
-        :path ([ :predicate sc:hasStartCanvas ]);
+        :path sc:hasStartCanvas;
         :shape [ a :OptionalShape; :item [ a :ResourceShape ] ]
     ];
     :property _:thumbnailProperty;
     :property [
         :name "logo";
-        :path ([ :predicate foaf:logo ]);
+        :path foaf:logo;
         :shape [
             a :OptionalShape;
             :item [
@@ -71,7 +71,7 @@ sc:Manifest a :ObjectShape;
                 :property _:idProperty;
                 :property [
                     :name "service";
-                    :path ([ :predicate svcs:has_service ]);
+                    :path svcs:has_service;
                     :shape [ a :OptionalShape; :item _:service ]
                 ]
             ]
@@ -81,23 +81,23 @@ sc:Manifest a :ObjectShape;
 sc:Sequence a :ObjectShape;
     :typeProperty [
         :name "@type";
-        :path ([ :predicate rdf:type ]);
+        :path rdf:type;
         :shape [ a :ResourceShape; :termValue sc:Sequence ]
     ];
     :property _:idProperty;
     :property [
         :name "label";
-        :path ([ :predicate rdfs:label ]);
+        :path rdfs:label;
         :shape [ a :OptionalShape; :item [ a :LiteralShape; :termDatatype xsd:string ] ]
     ];
     :property [
         :name "canvases";
-        :path ([ :predicate sc:hasCanvases ]);
+        :path sc:hasCanvases;
         :shape [ a :ListShape; :item sc:Canvas ]
     ];
     :property [
         :name "rendering";
-        :path ([ :predicate dcterms:hasFormat ]);
+        :path dcterms:hasFormat;
         :shape [
             a :OptionalShape;
             :item [
@@ -110,7 +110,7 @@ sc:Sequence a :ObjectShape;
     ];
     :property [
         :name "startCanvas";
-        :path ([ :predicate sc:hasStartCanvas ]);
+        :path sc:hasStartCanvas;
         :shape [ a :OptionalShape; :item [ a :ResourceShape ] ]
     ];
     :property _:viewingDirectionProperty;
@@ -119,7 +119,7 @@ sc:Sequence a :ObjectShape;
 sc:Canvas a :ObjectShape;
     :typeProperty [
         :name "@type";
-        :path ([ :predicate rdf:type ]);
+        :path rdf:type;
         :shape [ a :ResourceShape; :termValue sc:Canvas ]
     ];
     :property _:idProperty;
@@ -128,12 +128,12 @@ sc:Canvas a :ObjectShape;
     :property _:heightProperty;
     :property [
         :name "images";
-        :path ([ :predicate sc:hasImageAnnotations ]);
+        :path sc:hasImageAnnotations;
         :shape [ a :ListShape; :item oa:Annotation ]
     ];
     :property [
         :name "otherContent";
-        :path ([ :predicate sc:hasLists ]);
+        :path sc:hasLists;
         :shape [ a :OptionalShape; :item [ a :ListShape; :item sc:AnnotationList ] ]
     ];
     :property _:thumbnailProperty;
@@ -142,28 +142,28 @@ sc:Canvas a :ObjectShape;
 oa:Annotation a :ObjectShape;
     :typeProperty [
         :name "@type";
-        :path ([ :predicate rdf:type ]);
+        :path rdf:type;
         :shape [ a :ResourceShape; :termValue oa:Annotation ]
     ];
     :property _:idProperty;
     :property [
         :name "motivation";
-        :path ([ :predicate oa:motivatedBy ]);
+        :path oa:motivatedBy;
         :shape [ a :ResourceShape ]
     ];
     :property [
         :name "on";
-        :path ([ :predicate oa:hasTarget ]);
+        :path oa:hasTarget;
         :shape [ a :ResourceShape ]
     ];
     :property [
         :name "resource";
-        :path ([ :predicate oa:hasBody ]);
+        :path oa:hasBody;
         :shape [
             a :ObjectShape;
             :typeProperty [
                 :name "@type";
-                :path ([ :predicate rdf:type ]);
+                :path rdf:type;
                 :shape [ a :ResourceShape; :termValue dctypes:Image ]
             ];
             :property _:idProperty;
@@ -177,27 +177,27 @@ oa:Annotation a :ObjectShape;
 sc:AnnotationList a :ObjectShape;
     :typeProperty [
         :name "@type";
-        :path ([ :predicate rdf:type ]);
+        :path rdf:type;
         :shape [ a :ResourceShape; :termValue sc:AnnotationList ]
     ];
     :property _:idProperty;
     :property [
         :name "label";
-        :path ([ :predicate rdfs:label ]);
+        :path rdfs:label;
         :shape [ a :OptionalShape; :item [ a :LiteralShape; :termDatatype xsd:string ] ]
     ].
 
 sc:Range a :ObjectShape;
     :typeProperty [
         :name "@type";
-        :path ([ :predicate rdf:type ]);
+        :path rdf:type;
         :shape [ a :ResourceShape; :termValue sc:Range ]
     ];
     :property _:idProperty;
     :property _:metadataProperty;
     :property [
         :name "canvases";
-        :path ([ :predicate sc:hasCanvases ]);
+        :path sc:hasCanvases;
         :shape [
             a :OptionalShape;
             :item [ a :ListShape; :item [ a :ResourceShape ] ]
@@ -205,7 +205,7 @@ sc:Range a :ObjectShape;
     ];
     :property [
         :name "ranges";
-        :path ([ :predicate sc:hasRanges ]);
+        :path sc:hasRanges;
         :shape [
             a :OptionalShape;
             :item [ a :ListShape; :item [ a :ResourceShape ] ]
@@ -213,12 +213,12 @@ sc:Range a :ObjectShape;
     ];
     :property [
         :name "members";
-        :path ([ :predicate sc:hasParts ]);
+        :path sc:hasParts;
         :shape [ a :OptionalShape; :item [ a :ListShape; :item _:rangePart ] ]
     ];
     :property [
         :name "within";
-        :path ([ :predicate dcterms:isPartOf ]);
+        :path dcterms:isPartOf;
         :shape [ a :OptionalShape; :item [ a :ResourceShape ] ]
     ].
 
@@ -229,11 +229,11 @@ _:rangePart a :ObjectShape;
 # Properties with multiple usage
 
 _:formatProperty :name "format";
-    :path ([ :predicate dc:format ]);
+    :path dc:format;
     :shape [ a :LiteralShape; :termDatatype xsd:string ].
 
 _:heightProperty :name "height";
-    :path ([ :predicate exif:height ]);
+    :path exif:height;
     :shape [ a :LiteralShape; :termDatatype xsd:integer ].
 
 _:idProperty :name "@id";
@@ -241,80 +241,80 @@ _:idProperty :name "@id";
     :shape [ a :ResourceShape ].
 
 _:labelProperty :name "label";
-    :path ([ :predicate rdfs:label ]);
+    :path rdfs:label;
     :shape [ a :LiteralShape; :termDatatype xsd:string ].
 
 _:metadataProperty :name "metadata";
-    :path ([ :predicate sc:metadataLabels ]);
+    :path sc:metadataLabels;
     :shape [ a :OptionalShape; :item [ a :ListShape; :item _:metadataItem ] ].
 
 _:metadataItem a :ObjectShape;
     :property [
         :name "label";
-        :path ([ :predicate rdfs:label ]);
+        :path rdfs:label;
         :shape [ a :SetShape; :item [ a :LiteralShape ] ]
     ];
     :property [
         :name "value";
-        :path ([ :predicate rdf:value ]);
+        :path rdf:value;
         :shape [ a :SetShape; :item [ a :LiteralShape ] ]
     ].
 
 _:serviceProperty :name "service";
-    :path ([ :predicate svcs:has_service ]);
+    :path svcs:has_service;
     :shape _:service.
 
 _:service a :ObjectShape;
     :property _:idProperty;
     :property [
         :name "profile";
-        :path ([ :predicate doap:implements ]);
+        :path doap:implements;
         :shape [ a :ResourceShape ]
     ].
 
 _:thumbnailProperty :name "thumbnail";
-    :path ([ :predicate foaf:thumbnail ]);
+    :path foaf:thumbnail;
     :shape [
         a :OptionalShape;
         :item [
             a :ObjectShape;
             :property [
                 :name "format";
-                :path ([ :predicate dc:format ]);
+                :path dc:format;
                 :shape [ a :OptionalShape; :item [ a :LiteralShape; :termDatatype xsd:string ] ]
             ];
             :property [
                 :name "height";
-                :path ([ :predicate exif:height ]);
+                :path exif:height;
                 :shape [ a :OptionalShape; :item [ a :LiteralShape; :termDatatype xsd:integer ] ]
             ];
             :property _:idProperty;
             :property [
                 :name "service";
-                :path ([ :predicate svcs:has_service ]);
+                :path svcs:has_service;
                 :shape [ a :OptionalShape; :item _:service ]
             ];
             :property [
                 :name "@type";
-                :path ([ :predicate rdf:type ]);
+                :path rdf:type;
                 :shape [ a :OptionalShape; :item [ a :ResourceShape ] ]
             ];
             :property [
                 :name "width";
-                :path ([ :predicate exif:width ]);
+                :path exif:width;
                 :shape [ a :OptionalShape; :item [ a :LiteralShape; :termDatatype xsd:integer ] ]
             ]
         ]
     ].
 
 _:viewingDirectionProperty :name "viewingDirection";
-    :path ([ :predicate sc:viewingDirection ]);
+    :path sc:viewingDirection;
     :shape [ a :OptionalShape; :item [ a :ResourceShape ] ]. #TODO: use vocab here
 
 _:viewingHintProperty :name "viewingHint";
-    :path ([ :predicate sc:viewingHint ]);
+    :path sc:viewingHint;
     :shape [ a :OptionalShape; :item [ a :ResourceShape ] ]. #TODO: use vocab here
 
 _:widthProperty :name "width";
-    :path ([ :predicate exif:width ]);
+    :path exif:width;
     :shape [ a :LiteralShape; :termDatatype xsd:integer ].

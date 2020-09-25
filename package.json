@@ -14,18 +14,19 @@
   "author": "Alexey Morozov <alexey.morozov@live.ru>",
   "license": "MIT",
   "dependencies": {
-    "@types/n3": "^1.0.7",
-    "@types/sparqljs": "^2.1.0",
+    "@types/n3": "^1.4.4",
+    "@types/sparqljs": "^3.1.0",
     "benchmark": "^2.1.4",
     "jsonld": "^1.6.0",
-    "n3": "^1.1.0",
-    "ramp-shapes": "^0.5.0",
-    "sparqljs": "^2.2.3"
+    "n3": "^1.6.3",
+    "ramp-shapes": "^0.8.0",
+    "sparqljs": "^3.1.2",
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@types/benchmark": "^1.0.31",
     "@types/node": "^11.13.6",
-    "ts-node": "^8.1.0",
-    "typescript": "^3.4.4"
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
   }
 }

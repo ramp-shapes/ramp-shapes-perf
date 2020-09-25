@@ -30,10 +30,10 @@ export function writeQuadsToTurtle(
     const writer = new N3.Writer(output, {prefixes});
     for (const quad of quads) {
       const q = N3.DataFactory.quad(
-        Rdf.wrap(quad.subject) as N3.Quad_Subject,
-        Rdf.wrap(quad.predicate) as N3.Quad_Predicate,
-        Rdf.wrap(quad.object) as N3.Quad_Object,
-        Rdf.wrap(quad.graph) as N3.Quad_Graph,
+        quad.subject,
+        quad.predicate,
+        quad.object,
+        quad.graph,
       );
       writer.addQuad(q);
     }

@@ -1,43 +1,45 @@
 import { Rdf } from 'ramp-shapes';
 
+const namedNode = (value: string) => Rdf.DefaultDataFactory.namedNode(value);
+
 export namespace rdf {
   export const NAMESPACE = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
-  export const type = Rdf.namedNode(NAMESPACE + 'type');
-  export const value = Rdf.namedNode(NAMESPACE + 'value');
-  export const first = Rdf.namedNode(NAMESPACE + 'first');
-  export const rest = Rdf.namedNode(NAMESPACE + 'rest');
-  export const nil = Rdf.namedNode(NAMESPACE + 'nil');
+  export const type = namedNode(NAMESPACE + 'type');
+  export const value = namedNode(NAMESPACE + 'value');
+  export const first = namedNode(NAMESPACE + 'first');
+  export const rest = namedNode(NAMESPACE + 'rest');
+  export const nil = namedNode(NAMESPACE + 'nil');
 }
 
 export namespace rdfs {
   export const NAMESPACE = 'http://www.w3.org/2000/01/rdf-schema#';
-  export const label = Rdf.namedNode(NAMESPACE + 'label');
+  export const label = namedNode(NAMESPACE + 'label');
 }
 
 export namespace xsd {
   export const NAMESPACE = 'http://www.w3.org/2001/XMLSchema#';
-  export const string = Rdf.namedNode(NAMESPACE + 'string');
-  export const boolean = Rdf.namedNode(NAMESPACE + 'boolean');
-  export const integer = Rdf.namedNode(NAMESPACE + 'integer');
-  export const double = Rdf.namedNode(NAMESPACE + 'double');
-  export const decimal = Rdf.namedNode(NAMESPACE + 'decimal');
-  export const nonNegativeInteger = Rdf.namedNode(NAMESPACE + 'nonNegativeInteger');
-  export const dateTime = Rdf.namedNode(NAMESPACE + 'dateTime');
+  export const string = namedNode(NAMESPACE + 'string');
+  export const boolean = namedNode(NAMESPACE + 'boolean');
+  export const integer = namedNode(NAMESPACE + 'integer');
+  export const double = namedNode(NAMESPACE + 'double');
+  export const decimal = namedNode(NAMESPACE + 'decimal');
+  export const nonNegativeInteger = namedNode(NAMESPACE + 'nonNegativeInteger');
+  export const dateTime = namedNode(NAMESPACE + 'dateTime');
 }
 
 export namespace oa {
   export const NAMESPACE = 'http://www.w3.org/ns/oa#';
-  export const Annotation = Rdf.namedNode(NAMESPACE + 'Annotation');
-  export const RangeSelector = Rdf.namedNode(NAMESPACE + 'RangeSelector');
-  export const TextPositionSelector = Rdf.namedNode(NAMESPACE + 'TextPositionSelector');
-  export const XPathSelector = Rdf.namedNode(NAMESPACE + 'XPathSelector');
-  export const hasBody = Rdf.namedNode(NAMESPACE + 'hasBody');
-  export const hasTarget = Rdf.namedNode(NAMESPACE + 'hasTarget');
-  export const hasSource = Rdf.namedNode(NAMESPACE + 'hasSource');
-  export const hasSelector = Rdf.namedNode(NAMESPACE + 'hasSelector');
-  export const hasStartSelector = Rdf.namedNode(NAMESPACE + 'hasStartSelector');
-  export const hasEndSelector = Rdf.namedNode(NAMESPACE + 'hasEndSelector');
-  export const start = Rdf.namedNode(NAMESPACE + 'start');
-  export const end = Rdf.namedNode(NAMESPACE + 'end');
-  export const refinedBy = Rdf.namedNode(NAMESPACE + 'refinedBy');
+  export const Annotation = namedNode(NAMESPACE + 'Annotation');
+  export const RangeSelector = namedNode(NAMESPACE + 'RangeSelector');
+  export const TextPositionSelector = namedNode(NAMESPACE + 'TextPositionSelector');
+  export const XPathSelector = namedNode(NAMESPACE + 'XPathSelector');
+  export const hasBody = namedNode(NAMESPACE + 'hasBody');
+  export const hasTarget = namedNode(NAMESPACE + 'hasTarget');
+  export const hasSource = namedNode(NAMESPACE + 'hasSource');
+  export const hasSelector = namedNode(NAMESPACE + 'hasSelector');
+  export const hasStartSelector = namedNode(NAMESPACE + 'hasStartSelector');
+  export const hasEndSelector = namedNode(NAMESPACE + 'hasEndSelector');
+  export const start = namedNode(NAMESPACE + 'start');
+  export const end = namedNode(NAMESPACE + 'end');
+  export const refinedBy = namedNode(NAMESPACE + 'refinedBy');
 }

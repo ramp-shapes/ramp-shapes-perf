@@ -91,7 +91,7 @@ export function toRdf(
 function registerTtlParser() {
   JsonLd.registerRDFParser('text/turtle', (input, callback) => {
     const quads: N3.Quad[] = [];
-    N3.Parser().parse(input, (error, quad, hash) => {
+    new N3.Parser().parse(input, (error, quad, hash) => {
       if (error) {
         callback(error, quads as JsonLd.Quad[]);
       } else if (quad) {

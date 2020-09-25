@@ -7,7 +7,7 @@
 oa:Annotation a :ObjectShape;
     :typeProperty [
         :name "type";
-        :path ([ :predicate rdf:type ]);
+        :path rdf:type;
         :shape [ a :ResourceShape; :termValue oa:Annotation ]
     ];
     :property [
@@ -17,17 +17,17 @@ oa:Annotation a :ObjectShape;
     ];
     :property [
         :name "target";
-        :path ([ :predicate oa:hasTarget ]);
+        :path oa:hasTarget;
         :shape [
             a :ObjectShape;
             :property [
                 :name "source";
-                :path ([ :predicate oa:hasSource ]);
+                :path oa:hasSource;
                 :shape [ a :ResourceShape ]
             ];
             :property [
                 :name "selector";
-                :path ([ :predicate oa:hasSelector ]);
+                :path oa:hasSelector;
                 :shape [
                     a :UnionShape;
                     :variant oa:RangeSelector, oa:XPathSelector
@@ -37,12 +37,12 @@ oa:Annotation a :ObjectShape;
     ];
     :property [
         :name "body";
-        :path ([ :predicate oa:hasBody ]);
+        :path oa:hasBody;
         :shape [
             a :ObjectShape;
             :property [
                 :name "label";
-                :path ([ :predicate rdfs:label ]);
+                :path rdfs:label;
                 :shape [
                     a :MapShape;
                     :mapKey [ :shape _:bodyLabel; :termPart :TermLanguage ];
@@ -59,50 +59,50 @@ _:bodyLabel a :LiteralShape;
 oa:RangeSelector a :ObjectShape;
     :typeProperty [
         :name "type";
-        :path ([ :predicate rdf:type ]);
+        :path rdf:type;
         :shape [ a :ResourceShape; :termValue oa:RangeSelector ]
     ];
     :property [
         :name "start";
-        :path ([ :predicate oa:hasStartSelector ]);
+        :path oa:hasStartSelector;
         :shape oa:XPathSelector
     ];
     :property [
         :name "end";
-        :path ([ :predicate oa:hasEndSelector ]);
+        :path oa:hasEndSelector;
         :shape oa:XPathSelector
     ].
 
 oa:XPathSelector a :ObjectShape;
     :typeProperty [
         :name "type";
-        :path ([ :predicate rdf:type ]);
+        :path rdf:type;
         :shape [ a :ResourceShape; :termValue oa:XPathSelector ]
     ];
     :property [
         :name "xpath";
-        :path ([ :predicate rdf:value ]);
+        :path rdf:value;
         :shape [ a :LiteralShape; :termDatatype xsd:string ]
     ];
     :property [
         :name "refinedBy";
-        :path ([ :predicate oa:refinedBy ]);
+        :path oa:refinedBy;
         :shape [ a :OptionalShape; :item oa:TextPositionSelector ]
     ].
 
 oa:TextPositionSelector a :ObjectShape;
     :typeProperty [
         :name "type";
-        :path ([ :predicate rdf:type ]);
+        :path rdf:type;
         :shape [ a :ResourceShape; :termValue oa:TextPositionSelector ]
     ];
     :property [
         :name "start";
-        :path ([ :predicate oa:start ]);
+        :path oa:start;
         :shape [ a :LiteralShape; :termDatatype xsd:nonNegativeInteger ]
     ];
     :property [
         :name "end";
-        :path ([ :predicate oa:end ]);
+        :path oa:end;
         :shape [ a :LiteralShape; :termDatatype xsd:nonNegativeInteger ]
     ].
