@@ -15,7 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "benchmark": "^2.1.4",
-    "jsonld": "^1.6.0",
+    "jsonld": "^5.2.0",
     "n3": "^1.11.1",
     "ramp-shapes": "^0.10.0",
     "sparqljs": "^3.5.1",

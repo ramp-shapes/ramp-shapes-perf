@@ -71,7 +71,8 @@ async function main() {
         'http://iiif.io/api/presentation/2/context.json',
         {documentLoader: DOCUMENT_LOADER}
       );
-      const quads = await JsonLd.toRdf(jsonldDocument, {documentLoader: DOCUMENT_LOADER});
+      const quads = (await JsonLd.toRdf(jsonldDocument, {documentLoader: DOCUMENT_LOADER}))
+        .map(JsonLd.mapJsonLdQuad);
       manifest = {
         manifestName,
         fileName,
@@ -181,7 +182,8 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
         'http://iiif.io/api/presentation/2/context.json',
         {documentLoader: DOCUMENT_LOADER}
       );
-      const quads = await JsonLd.toRdf(flatDocument, {documentLoader: DOCUMENT_LOADER});
+      const quads = (await JsonLd.toRdf(flatDocument, {documentLoader: DOCUMENT_LOADER}))
+        .map(JsonLd.mapJsonLdQuad);
       manifest.jsonldFlattenQuadCount = quads.length;
       await Util.writeQuadsToTurtle(
         path.join(__dirname, '../out/flatten-jsonld', `${manifest.manifestName}.ttl`),

@@ -3,7 +3,7 @@ import * as Ramp from 'ramp-shapes';
 
 import * as JsonLd from './jsonld';
 import { runBenchmark } from './benchmark';
-import { rdf, rdfs, xsd, oa } from './namespaces';
+import { oa } from './namespaces';
 import { readQuadsFromTurtle, toJson, readShapes } from './util';
 
 const QUADS = readQuadsFromTurtle(path.join(__dirname, '../datasets/annotation/graph.ttl'));
@@ -21,13 +21,10 @@ async function main() {
 
   const JSONLD_DOCUMENT = await JsonLd.fromRdf(QUADS, {documentLoader, useNativeTypes: true});
 
-  let jsonldCompacted: any;
+  let jsonldFramed: any;
   {
-    const framed = await JsonLd.frame(JSONLD_DOCUMENT, JSONLD_FRAME, {documentLoader}) as any;
-    framed['@context'] = 'https://www.w3.org/ns/anno.jsonld';
-    jsonldCompacted = await JsonLd.compact(framed, JSONLD_CONTEXT, {documentLoader});
-    jsonldCompacted['@context'] = 'https://www.w3.org/ns/anno.jsonld';
-    console.log('[JSON-LD] compacted:', toJson(jsonldCompacted));
+    jsonldFramed = await JsonLd.frame(JSONLD_DOCUMENT, JSONLD_FRAME, {documentLoader}) as any;
+    console.log('[JSON-LD] framed:', toJson(jsonldFramed));
   }
 
   let ramFramed: any;
@@ -43,9 +40,7 @@ async function main() {
     {
       name: '[OA] frame JSON-LD',
       benchmark: async () => {
-        const framed = await JsonLd.frame(JSONLD_DOCUMENT, JSONLD_FRAME, {documentLoader}) as any;
-        framed['@context'] = 'https://www.w3.org/ns/anno.jsonld';
-        const compacted = await JsonLd.compact(framed, JSONLD_CONTEXT, {documentLoader});
+        const framed = await JsonLd.frame(JSONLD_DOCUMENT, JSONLD_FRAME, {documentLoader});
       }
     },
     {
@@ -63,7 +58,7 @@ async function main() {
     {
       name: '[OA] flatten JSON-LD',
       benchmark: async () => {
-        const result = await JsonLd.toRdf(jsonldCompacted, {documentLoader});
+        const result = await JsonLd.toRdf(jsonldFramed, {documentLoader});
       }
     },
     {

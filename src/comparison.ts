@@ -39,11 +39,12 @@ const documentLoader = JsonLd.makeDocumentLoader({
     Util.toJson(jsonldFramed),
     {encoding: 'utf8'}
   );
-  const jsonldCompacted = await JsonLd.compact(jsonldFramed, JSONLD_CONTEXT, {documentLoader});
-  await Util.writeFile(
-    path.join(outDir, `jsonld-compacted.json`),
-    Util.toJson(jsonldCompacted),
-    {encoding: 'utf8'}
+  const jsonldFlattened = (await JsonLd.toRdf(jsonldFramed, {documentLoader}))
+    .map(JsonLd.mapJsonLdQuad);
+  await Util.writeQuadsToTurtle(
+    path.join(outDir, `jsonld-flattened.ttl`),
+    jsonldFlattened,
+    {...PREFIXES, "": "http://example.com/data/"}
   );
 
   const query = Ramp.generateQuery({shape: ROOT_SHAPE, prefixes: PREFIXES});

@@ -17,9 +17,7 @@
  */
 
 declare module "jsonld" {
-  interface DocumentLoader {
-    (url: string, callback: (error: any, result: DocumentLoaderResult | null) => void): any;
-  }
+  type DocumentLoader = (url: string, options?: object) => Promise<DocumentLoaderResult>;
 
   interface DocumentLoaderResult {
     contextUrl?: string | null;
@@ -32,8 +30,6 @@ declare module "jsonld" {
   }
 
   const documentLoader: DocumentLoader;
-
-  type Callback = (error: any, data: any) => void;
 
   interface CompactOptions {
     /** the base IRI to use. */
@@ -65,10 +61,8 @@ declare module "jsonld" {
     compactionMap?: (info: any) => any;
   }
 
-  function compact(input: any, ctx: any): Promise<any>;
-  function compact(input: any, ctx: any, callback: Callback): void;
-  function compact(input: any, ctx: any, options: CompactOptions): Promise<any>;
-  function compact(input: any, ctx: any, options: CompactOptions, callback: Callback): void;
+  function compact(doc: any, ctx: any): Promise<any>;
+  function compact(doc: any, ctx: any, options: CompactOptions): Promise<any>;
 
   interface ExpandOptions {
     /** the base IRI to use. */
@@ -87,10 +81,8 @@ declare module "jsonld" {
     expansionMap?: (info: any) => any;
   }
 
-  function expand(input: any): Promise<any>;
-  function expand(input: any, callback: Callback): void;
-  function expand(input: any, options: ExpandOptions): Promise<any>;
-  function expand(input: any, options: ExpandOptions, callback: Callback): void;
+  function expand(doc: any): Promise<any>;
+  function expand(doc: any, options: ExpandOptions): Promise<any>;
 
   interface FlattenOptions {
     /** the base IRI to use. */
@@ -101,10 +93,8 @@ declare module "jsonld" {
     documentLoader?: DocumentLoader;
   }
 
-  function flatten(input: any, ctx: any): Promise<any>;
-  function flatten(input: any, ctx: any, callback: Callback): void;
-  function flatten(input: any, ctx: any, options: FlattenOptions): Promise<any>;
-  function flatten(input: any, ctx: any, options: FlattenOptions, callback: Callback): void;
+  function flatten(doc: any, ctx: any): Promise<any>;
+  function flatten(doc: any, ctx: any, options: FlattenOptions): Promise<any>;
 
   interface FrameOptions {
     /** the base IRI to use. */
@@ -123,10 +113,8 @@ declare module "jsonld" {
     documentLoader?: DocumentLoader;
   }
 
-  function frame(input: any, frame: any): Promise<any>;
-  function frame(input: any, frame: any, callback: Callback): void;
-  function frame(input: any, frame: any, options: FrameOptions): Promise<any>;
-  function frame(input: any, frame: any, options: FrameOptions, callback: Callback): void;
+  function frame(doc: any, frame: any): Promise<any>;
+  function frame(doc: any, frame: any, options: FrameOptions): Promise<any>;
 
   interface NormalizeOptions {
     /** the normalization algorithm to use, `URDNA2015` or `URGNA2012` (default: `URDNA2015`). */
@@ -153,10 +141,8 @@ declare module "jsonld" {
     useNative?: boolean;
   }
 
-  function normalize(input: any): Promise<any>;
-  function normalize(input: any, callback: Callback): void;
-  function normalize(input: any, options: NormalizeOptions): Promise<any>;
-  function normalize(input: any, options: NormalizeOptions, callback: Callback): void;
+  function normalize(doc: any): Promise<any>;
+  function normalize(doc: any, options: NormalizeOptions): Promise<any>;
 
   interface FromRdfOptions {
     /**
@@ -176,9 +162,7 @@ declare module "jsonld" {
   }
 
   function fromRDF(dataset: any): Promise<any>;
-  function fromRDF(dataset: any, callback: Callback): void;
   function fromRDF(dataset: any, options: FromRdfOptions): Promise<any>;
-  function fromRDF(dataset: any, options: FromRdfOptions, callback: Callback): void;
 
   interface ToRdfOptions {
     /** the base IRI to use. */
@@ -204,16 +188,12 @@ declare module "jsonld" {
     documentLoader?: DocumentLoader;
   }
 
-  function toRDF(input: any): Promise<any>;
-  function toRDF(input: any, callback: Callback): void;
-  function toRDF(input: any, options: ToRdfOptions): Promise<any>;
-  function toRDF(input: any, options: ToRdfOptions, callback: Callback): void;
+  function toRDF(doc: any): Promise<Quad[]>;
+  function toRDF(doc: any, options: ToRdfOptions): Promise<Quad[]>;
 
-  interface RdfParser {
-    (input: any, callback: (error: Error | undefined, result: Quad[]) => void): any;
-  }
+  type RdfParser = (input: any) => Promise<Quad[]>;
 
-  function registerRDFParser(contentType: string, calback: RdfParser): void;
+  function registerRDFParser(contentType: string, parser: RdfParser): void;
 
   interface JsonLdValue {
     '@value': any;
@@ -244,7 +224,7 @@ declare module "jsonld" {
     value: string;
   }
 
-  type Term = SimpleTerm | Literal | BlankTerm;
+  type Term = SimpleTerm | Literal | BlankTerm | GraphTerm;
 
   interface Quad {
     subject: Term;

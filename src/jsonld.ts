@@ -1,6 +1,6 @@
-import * as fs from 'fs';
 import * as JsonLd from 'jsonld';
 import * as N3 from 'n3';
+import { Rdf } from 'ramp-shapes';
 
 registerTtlParser();
 
@@ -15,9 +15,9 @@ export interface LoaderOptions {
 const NODE_DOCUMENT_LOADER = JsonLd.documentLoaders.node();
 
 export function makeDocumentLoader(options: LoaderOptions): JsonLd.DocumentLoader {
-  return (url, callback) => {
+  return (url) => {
     if (options.overrideContexts && url in options.overrideContexts) {
-      return callback(null, {
+      return Promise.resolve({
         // this is for a context via a link header
         contextUrl: null,
         // this is the actual document that was loaded
@@ -28,77 +28,91 @@ export function makeDocumentLoader(options: LoaderOptions): JsonLd.DocumentLoade
     }
 
     if (options.fetchRemoteContexts) {
-      return NODE_DOCUMENT_LOADER(url, callback);
+      return NODE_DOCUMENT_LOADER(url);
     } else {
-      callback(new Error(`Fetching remote JSON-LD contexts is not allowed: ${url}`), null);
+      return Promise.reject(new Error(`Fetching remote JSON-LD contexts is not allowed: ${url}`));
     }
   };
 }
 
 export function compact(
-  input: object,
-  ctx: object | string,
+  doc: object,
+  context: object | string,
   options: JsonLd.CompactOptions & { documentLoader: JsonLd.DocumentLoader }
 ): Promise<any> {
-  return new Promise((resolve, reject) =>
-    JsonLd.compact(input, ctx, options,
-      (error, result) => error ? reject(error) : resolve(result))
-  );
+  return JsonLd.compact(doc, context, options);
 }
 
 export function frame(
-  input: object | string,
+  doc: object | string,
   frame: object,
   options: JsonLd.FrameOptions & { documentLoader: JsonLd.DocumentLoader }
 ): Promise<object> {
-  return new Promise((resolve, reject) =>
-    JsonLd.frame(input, frame, options,
-      (error, result) => error ? reject(error) : resolve(result))
-  );
+  return JsonLd.frame(doc, frame, options);
 }
 
 export function flatten(
-  input: object,
-  ctx: object | string,
+  doc: object,
+  context: object | string,
   options: JsonLd.FlattenOptions & { documentLoader: JsonLd.DocumentLoader }
 ): Promise<object> {
-  return new Promise<any>((resolve, reject) =>
-    JsonLd.flatten(input, ctx, options,
-      (error, result) => error ? reject(error) : resolve(result))
-  );
+  return JsonLd.flatten(doc, context, options);
 }
 
 export function fromRdf(
   dataset: object | string,
   options: JsonLd.FromRdfOptions & { documentLoader: JsonLd.DocumentLoader }
 ): Promise<object> {
-  return new Promise((resolve, reject) =>
-    JsonLd.fromRDF(dataset, options,
-      (error, result) => error ? reject(error) : resolve(result))
-  );
+  return JsonLd.fromRDF(dataset, options);
 }
 
 export function toRdf(
-  input: object,
+  doc: object,
   options: JsonLd.ToRdfOptions & { documentLoader: JsonLd.DocumentLoader }
-): Promise<any[]> {
-  return new Promise((resolve, reject) =>
-    JsonLd.toRDF(input, options,
-      (error, result) => error ? reject(error) : resolve(result))
-  );
+): Promise<JsonLd.Quad[]> {
+  return JsonLd.toRDF(doc, options);
 }
 
 function registerTtlParser() {
-  JsonLd.registerRDFParser('text/turtle', (input, callback) => {
-    const quads: N3.Quad[] = [];
-    new N3.Parser().parse(input, (error, quad, hash) => {
-      if (error) {
-        callback(error, quads as JsonLd.Quad[]);
-      } else if (quad) {
-        quads.push(quad);
-      } else if (callback) {
-        callback(undefined, quads as JsonLd.Quad[]);
-      }
+  JsonLd.registerRDFParser('text/turtle', input => {
+    return new Promise((resolve, reject) => {
+      const quads: N3.Quad[] = [];
+      new N3.Parser().parse(input, (error, quad, hash) => {
+        if (error) {
+          reject(error);
+        } else if (quad) {
+          quads.push(quad);
+        } else {
+          resolve(quads as JsonLd.Quad[]);
+        }
+      });
     });
   });
+}
+
+export function mapJsonLdQuad(quad: JsonLd.Quad): Rdf.Quad {
+  return Rdf.DefaultDataFactory.quad(
+    mapJsonLdTerm(quad.subject) as Rdf.Quad['subject'],
+    mapJsonLdTerm(quad.predicate) as Rdf.Quad['predicate'],
+    mapJsonLdTerm(quad.object) as Rdf.Quad['object'],
+    mapJsonLdTerm(quad.graph) as Rdf.Quad['graph']
+  );
+}
+
+function mapJsonLdTerm(term: JsonLd.Term): Rdf.Term {
+  switch (term.termType) {
+    case 'NamedNode':
+      return Rdf.DefaultDataFactory.namedNode(term.value);
+    case 'BlankNode':
+      return Rdf.DefaultDataFactory.blankNode(term.value);
+    case 'Literal':
+      return Rdf.DefaultDataFactory.literal(
+        term.value,
+        term.language ? term.language : mapJsonLdTerm(term.datatype) as Rdf.NamedNode
+      );
+    case 'DefaultGraph':
+      return Rdf.DefaultDataFactory.defaultGraph();
+    default:
+      throw new Error(`Unexpected JSON-LD term type: "${(term as Rdf.Term).termType}"`);
+  }
 }
