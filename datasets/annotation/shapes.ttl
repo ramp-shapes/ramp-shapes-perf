@@ -2,107 +2,107 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix oa: <http://www.w3.org/ns/oa#>.
-@prefix : <http://ramp-shapes.github.io/schema#>.
+@prefix ramp: <http://ramp-shapes.github.io/schema#>.
 
-oa:Annotation a :ObjectShape;
-    :typeProperty [
-        :name "type";
-        :path rdf:type;
-        :shape [ a :ResourceShape; :termValue oa:Annotation ]
+oa:Annotation a ramp:Record;
+    ramp:typeProperty [
+        ramp:name "type";
+        ramp:path rdf:type;
+        ramp:shape [ a ramp:Resource; ramp:termValue oa:Annotation ]
     ];
-    :property [
-        :name "iri";
-        :path ();
-        :shape [ a :ResourceShape ]
+    ramp:property [
+        ramp:name "iri";
+        ramp:path ();
+        ramp:shape [ a ramp:Resource ]
     ];
-    :property [
-        :name "target";
-        :path oa:hasTarget;
-        :shape [
-            a :ObjectShape;
-            :property [
-                :name "source";
-                :path oa:hasSource;
-                :shape [ a :ResourceShape ]
+    ramp:property [
+        ramp:name "target";
+        ramp:path oa:hasTarget;
+        ramp:shape [
+            a ramp:Record;
+            ramp:property [
+                ramp:name "source";
+                ramp:path oa:hasSource;
+                ramp:shape [ a ramp:Resource ]
             ];
-            :property [
-                :name "selector";
-                :path oa:hasSelector;
-                :shape [
-                    a :UnionShape;
-                    :variant oa:RangeSelector, oa:XPathSelector
+            ramp:property [
+                ramp:name "selector";
+                ramp:path oa:hasSelector;
+                ramp:shape [
+                    a ramp:AnyOf;
+                    ramp:variant oa:RangeSelector, oa:XPathSelector
                 ]
             ]
         ]
     ];
-    :property [
-        :name "body";
-        :path oa:hasBody;
-        :shape [
-            a :ObjectShape;
-            :property [
-                :name "label";
-                :path rdfs:label;
-                :shape [
-                    a :MapShape;
-                    :mapKey [ :shape _:bodyLabel; :termPart :TermLanguage ];
-                    :mapValue [ :shape _:bodyLabel; :termPart :TermValue ];
-                    :item _:bodyLabel
+    ramp:property [
+        ramp:name "body";
+        ramp:path oa:hasBody;
+        ramp:shape [
+            a ramp:Record;
+            ramp:property [
+                ramp:name "label";
+                ramp:path rdfs:label;
+                ramp:shape [
+                    a ramp:Map;
+                    ramp:mapKey [ ramp:shape _:bodyLabel; ramp:termPart ramp:TermLanguage ];
+                    ramp:mapValue [ ramp:shape _:bodyLabel; ramp:termPart ramp:TermValue ];
+                    ramp:item _:bodyLabel
                 ]
             ]
         ]
     ].
 
-_:bodyLabel a :LiteralShape;
-    :termDatatype rdf:langString.
+_:bodyLabel a ramp:Literal;
+    ramp:termDatatype rdf:langString.
 
-oa:RangeSelector a :ObjectShape;
-    :typeProperty [
-        :name "type";
-        :path rdf:type;
-        :shape [ a :ResourceShape; :termValue oa:RangeSelector ]
+oa:RangeSelector a ramp:Record;
+    ramp:typeProperty [
+        ramp:name "type";
+        ramp:path rdf:type;
+        ramp:shape [ a ramp:Resource; ramp:termValue oa:RangeSelector ]
     ];
-    :property [
-        :name "start";
-        :path oa:hasStartSelector;
-        :shape oa:XPathSelector
+    ramp:property [
+        ramp:name "start";
+        ramp:path oa:hasStartSelector;
+        ramp:shape oa:XPathSelector
     ];
-    :property [
-        :name "end";
-        :path oa:hasEndSelector;
-        :shape oa:XPathSelector
+    ramp:property [
+        ramp:name "end";
+        ramp:path oa:hasEndSelector;
+        ramp:shape oa:XPathSelector
     ].
 
-oa:XPathSelector a :ObjectShape;
-    :typeProperty [
-        :name "type";
-        :path rdf:type;
-        :shape [ a :ResourceShape; :termValue oa:XPathSelector ]
+oa:XPathSelector a ramp:Record;
+    ramp:typeProperty [
+        ramp:name "type";
+        ramp:path rdf:type;
+        ramp:shape [ a ramp:Resource; ramp:termValue oa:XPathSelector ]
     ];
-    :property [
-        :name "xpath";
-        :path rdf:value;
-        :shape [ a :LiteralShape; :termDatatype xsd:string ]
+    ramp:property [
+        ramp:name "xpath";
+        ramp:path rdf:value;
+        ramp:shape [ a ramp:Literal; ramp:termDatatype xsd:string ]
     ];
-    :property [
-        :name "refinedBy";
-        :path oa:refinedBy;
-        :shape [ a :OptionalShape; :item oa:TextPositionSelector ]
+    ramp:property [
+        ramp:name "refinedBy";
+        ramp:path oa:refinedBy;
+        ramp:shape [ a ramp:Optional; ramp:item oa:TextPositionSelector ]
     ].
 
-oa:TextPositionSelector a :ObjectShape;
-    :typeProperty [
-        :name "type";
-        :path rdf:type;
-        :shape [ a :ResourceShape; :termValue oa:TextPositionSelector ]
+oa:TextPositionSelector a ramp:Record;
+    ramp:typeProperty [
+        ramp:name "type";
+        ramp:path rdf:type;
+        ramp:shape [ a ramp:Resource; ramp:termValue oa:TextPositionSelector ]
     ];
-    :property [
-        :name "start";
-        :path oa:start;
-        :shape [ a :LiteralShape; :termDatatype xsd:nonNegativeInteger ]
+    ramp:property [
+        ramp:name "start";
+        ramp:path oa:start;
+        ramp:shape [ a ramp:Literal; ramp:termDatatype xsd:nonNegativeInteger ]
     ];
-    :property [
-        :name "end";
-        :path oa:end;
-        :shape [ a :LiteralShape; :termDatatype xsd:nonNegativeInteger ]
+    ramp:property [
+        ramp:name "end";
+        ramp:path oa:end;
+        ramp:shape [ a ramp:Literal; ramp:termDatatype xsd:nonNegativeInteger ]
     ].
