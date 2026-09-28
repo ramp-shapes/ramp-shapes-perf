@@ -68,7 +68,7 @@ const documentLoader = JsonLd.makeDocumentLoader({
 
   const iterator = Ramp.frame({
     shape: ROOT_SHAPE,
-    dataset: Ramp.Rdf.dataset(DATA as Ramp.Rdf.Quad[]),
+    dataset: Ramp.dataset(DATA),
   });
   for (const {value} of iterator) {
     await writeFile(

@@ -1,5 +1,6 @@
 import * as path from 'node:path';
 import { performance } from 'node:perf_hooks';
+import type { Quad } from '@rdfjs/types';
 import * as Ramp from 'ramp-shapes';
 
 import * as JsonLd from './jsonld.js';
@@ -28,8 +29,8 @@ const JSONLD_IIIF_FRAME = readJson(
 const SHAPES = readShapes(
   path.join(import.meta.dirname, '../datasets/iiif-schema/manifest-shapes.ttl')
 );
-const MANIFEST_SHAPE_ID = Ramp.Rdf.DefaultDataFactory.namedNode('http://iiif.io/api/presentation/2#Manifest');
-const MANIFEST_SHAPE = SHAPES.find(s => Ramp.Rdf.equalTerms(s.id, MANIFEST_SHAPE_ID))!;
+const MANIFEST_SHAPE_ID = Ramp.DefaultDataFactory.namedNode('http://iiif.io/api/presentation/2#Manifest');
+const MANIFEST_SHAPE = SHAPES.find(s => Ramp.equalTerms(s.id, MANIFEST_SHAPE_ID))!;
 
 const PREFIXES: { [prefix: string]: string } = {
   "sc": "http://iiif.io/api/presentation/2#",
@@ -62,8 +63,8 @@ interface BenchmarkedManifest {
   readonly manifestName: string;
   readonly fileName: string;
   readonly jsonldFlatten: object;
-  readonly quads: Ramp.Rdf.Quad[];
-  readonly dataset: Ramp.Rdf.Dataset;
+  readonly quads: Quad[];
+  readonly dataset: Ramp.IndexedDataset;
   jsonldFramed?: object;
   jsonldFlattenQuadCount?: number;
   rampFramed?: object;
@@ -75,7 +76,9 @@ async function main() {
 
   const manifestDir = path.join(import.meta.dirname, '../datasets/iiif');
   for (const fileName of await readdir(manifestDir)) {
-    if (!fileName.endsWith('.json')) { continue; }
+    if (!fileName.endsWith('.json')) {
+      continue;
+    }
     const manifestName = fileName.substring(0, fileName.length - '.json'.length);
     let manifest: BenchmarkedManifest;
     try {
@@ -93,7 +96,7 @@ async function main() {
         fileName,
         jsonldFlatten,
         quads,
-        dataset: Ramp.Rdf.dataset(quads),
+        dataset: Ramp.dataset(quads),
       };
       manifests.push(manifest);
     } catch (err) {

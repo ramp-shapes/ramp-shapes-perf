@@ -11,8 +11,6 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "sourceMap": true,
-    // TODO: remove after update to latest ramp-shapes
-    "skipLibCheck": true
   },
   "include": [
     "src/**/*",

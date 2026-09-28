@@ -1,7 +1,8 @@
 import * as fs from 'node:fs';
 import { promisify } from 'node:util';
+import type { Quad } from '@rdfjs/types';
 import * as N3 from 'n3';
-import { Rdf, Shape, frameShapes } from 'ramp-shapes';
+import * as Ramp from 'ramp-shapes';
 
 export const exists = promisify(fs.exists);
 export const mkdir = promisify(fs.mkdir);
@@ -19,14 +20,14 @@ export function readJson(path: string): unknown {
   return JSON.parse(fs.readFileSync(path, {encoding: 'utf-8'}));
 }
 
-export function readQuadsFromTurtle(path: string): N3.Quad[] {
+export function readQuadsFromTurtle(path: string): Quad[] {
   const ttl = fs.readFileSync(path, {encoding: 'utf-8'});
-  return new N3.Parser().parse(ttl);
+  return new N3.Parser({factory: Ramp.DefaultDataFactory}).parse(ttl);
 }
 
 export function writeQuadsToTurtle(
   destinationPath: string,
-  quads: Iterable<Rdf.Quad>,
+  quads: Iterable<Quad>,
   prefixes: { [prefix: string]: string }
 ): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -49,13 +50,13 @@ export function toJson(match: unknown): string {
   return JSON.stringify(match, (key, value) => {
     if (typeof value === 'object' && value !== null && 'termType' in value) {
       // value is RDF term
-      return Rdf.toString(value);
+      return Ramp.termToString(value);
     }
     return value;
   }, 2);
 }
 
-export function readShapes(path: string): Shape[] {
+export function readShapes(path: string): Ramp.Shape[] {
   const quads = readQuadsFromTurtle(path);
-  return frameShapes(Rdf.dataset(quads as Rdf.Quad[]));
+  return Ramp.frameShapes(Ramp.dataset(quads));
 }

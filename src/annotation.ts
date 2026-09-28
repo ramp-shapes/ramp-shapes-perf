@@ -12,7 +12,7 @@ const QUADS = readQuadsFromTurtle(
 const SHAPES = readShapes(
   path.join(import.meta.dirname, '../datasets/annotation/shapes.ttl')
 );
-const ROOT_SHAPE = SHAPES.find(s => Ramp.Rdf.equalTerms(s.id, oa.Annotation))!;
+const ROOT_SHAPE = SHAPES.find(s => Ramp.equalTerms(s.id, oa.Annotation))!;
 const JSONLD_CONTEXT = readJson(
   path.join(import.meta.dirname, '../datasets/annotation/jsonld-context.json')
 ) as object;
@@ -37,7 +37,7 @@ async function main() {
 
   let ramFramed: any;
   {
-    const dataset = Ramp.Rdf.dataset(QUADS as Ramp.Rdf.Quad[]);
+    const dataset = Ramp.dataset(QUADS);
     for (const {value} of Ramp.frame({shape: ROOT_SHAPE, dataset})) {
       ramFramed = value;
       console.log('[RAMP] framed:', toJson(ramFramed));
@@ -54,7 +54,7 @@ async function main() {
     {
       name: '[OA] frame RAMP',
       benchmark: async () => {
-        const dataset = Ramp.Rdf.dataset(QUADS as Ramp.Rdf.Quad[]);
+        const dataset = Ramp.dataset(QUADS);
         for (const {value: framed} of Ramp.frame({shape: ROOT_SHAPE, dataset})) {
           // pass
         }

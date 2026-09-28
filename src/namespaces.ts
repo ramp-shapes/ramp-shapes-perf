@@ -1,6 +1,6 @@
-import { Rdf } from 'ramp-shapes';
+import * as Ramp from 'ramp-shapes';
 
-const namedNode = (value: string) => Rdf.DefaultDataFactory.namedNode(value);
+const namedNode = (value: string) => Ramp.DefaultDataFactory.namedNode(value);
 
 export namespace rdf {
   export const NAMESPACE = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';

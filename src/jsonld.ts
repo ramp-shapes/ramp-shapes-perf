@@ -1,6 +1,7 @@
+import type { NamedNode, Quad, Term } from '@rdfjs/types';
 import JsonLd from 'jsonld';
 import * as N3 from 'n3';
-import { Rdf } from 'ramp-shapes';
+import * as Ramp from 'ramp-shapes';
 
 registerTtlParser();
 
@@ -90,29 +91,29 @@ function registerTtlParser() {
   });
 }
 
-export function mapJsonLdQuad(quad: JsonLd.Quad): Rdf.Quad {
-  return Rdf.DefaultDataFactory.quad(
-    mapJsonLdTerm(quad.subject) as Rdf.Quad['subject'],
-    mapJsonLdTerm(quad.predicate) as Rdf.Quad['predicate'],
-    mapJsonLdTerm(quad.object) as Rdf.Quad['object'],
-    mapJsonLdTerm(quad.graph) as Rdf.Quad['graph']
+export function mapJsonLdQuad(quad: JsonLd.Quad): Quad {
+  return Ramp.DefaultDataFactory.quad(
+    mapJsonLdTerm(quad.subject) as Quad['subject'],
+    mapJsonLdTerm(quad.predicate) as Quad['predicate'],
+    mapJsonLdTerm(quad.object) as Quad['object'],
+    mapJsonLdTerm(quad.graph) as Quad['graph']
   );
 }
 
-function mapJsonLdTerm(term: JsonLd.Term): Rdf.Term {
+function mapJsonLdTerm(term: JsonLd.Term): Term {
   switch (term.termType) {
     case 'NamedNode':
-      return Rdf.DefaultDataFactory.namedNode(term.value);
+      return Ramp.DefaultDataFactory.namedNode(term.value);
     case 'BlankNode':
-      return Rdf.DefaultDataFactory.blankNode(term.value);
+      return Ramp.DefaultDataFactory.blankNode(term.value);
     case 'Literal':
-      return Rdf.DefaultDataFactory.literal(
+      return Ramp.DefaultDataFactory.literal(
         term.value,
-        term.language ? term.language : mapJsonLdTerm(term.datatype) as Rdf.NamedNode
+        term.language ? term.language : mapJsonLdTerm(term.datatype) as NamedNode
       );
     case 'DefaultGraph':
-      return Rdf.DefaultDataFactory.defaultGraph();
+      return Ramp.DefaultDataFactory.defaultGraph();
     default:
-      throw new Error(`Unexpected JSON-LD term type: "${(term as Rdf.Term).termType}"`);
+      throw new Error(`Unexpected JSON-LD term type: "${(term as Term).termType}"`);
   }
 }
