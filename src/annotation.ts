@@ -1,16 +1,24 @@
-import * as path from 'path';
+import * as path from 'node:path';
 import * as Ramp from 'ramp-shapes';
 
-import * as JsonLd from './jsonld';
-import { runBenchmark } from './benchmark';
-import { oa } from './namespaces';
-import { readQuadsFromTurtle, toJson, readShapes } from './util';
+import * as JsonLd from './jsonld.js';
+import { runBenchmark } from './benchmark.js';
+import { oa } from './namespaces.js';
+import { readJson, readQuadsFromTurtle, toJson, readShapes } from './util.js';
 
-const QUADS = readQuadsFromTurtle(path.join(__dirname, '../datasets/annotation/graph.ttl'));
-const SHAPES = readShapes(path.join(__dirname, '../datasets/annotation/shapes.ttl'));
+const QUADS = readQuadsFromTurtle(
+  path.join(import.meta.dirname, '../datasets/annotation/graph.ttl')
+);
+const SHAPES = readShapes(
+  path.join(import.meta.dirname, '../datasets/annotation/shapes.ttl')
+);
 const ROOT_SHAPE = SHAPES.find(s => Ramp.Rdf.equalTerms(s.id, oa.Annotation))!;
-const JSONLD_CONTEXT = require('../datasets/annotation/jsonld-context.json');
-const JSONLD_FRAME = require('../datasets/annotation/jsonld-frame.json');
+const JSONLD_CONTEXT = readJson(
+  path.join(import.meta.dirname, '../datasets/annotation/jsonld-context.json')
+) as object;
+const JSONLD_FRAME = readJson(
+  path.join(import.meta.dirname, '../datasets/annotation/jsonld-frame.json')
+) as object;
 
 async function main() {
   const documentLoader = JsonLd.makeDocumentLoader({

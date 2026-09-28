@@ -1,7 +1,7 @@
-import * as fs from 'fs';
+import * as fs from 'node:fs';
+import { promisify } from 'node:util';
 import * as N3 from 'n3';
 import { Rdf, Shape, frameShapes } from 'ramp-shapes';
-import { promisify } from 'util';
 
 export const exists = promisify(fs.exists);
 export const mkdir = promisify(fs.mkdir);
@@ -11,8 +11,12 @@ export const writeFile = promisify(fs.writeFile);
 
 export async function makeDirectoryIfNotExists(path: string) {
   if (!(await exists(path))) {
-    await mkdir(path);
+    await mkdir(path, {recursive: true});
   }
+}
+
+export function readJson(path: string): unknown {
+  return JSON.parse(fs.readFileSync(path, {encoding: 'utf-8'}));
 }
 
 export function readQuadsFromTurtle(path: string): N3.Quad[] {

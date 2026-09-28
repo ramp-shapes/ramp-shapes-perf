@@ -1,4 +1,4 @@
-import * as JsonLd from 'jsonld';
+import JsonLd from 'jsonld';
 import * as N3 from 'n3';
 import { Rdf } from 'ramp-shapes';
 

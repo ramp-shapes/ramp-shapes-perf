@@ -1,11 +1,11 @@
-import * as path from 'path';
+import * as path from 'node:path';
 
-import { BenchmarkGroup } from './benchmark';
-import * as Util from './util';
+import { BenchmarkGroup } from './benchmark.js';
+import * as Util from './util.js';
 
 async function writeLatexChart(statName: string, targets: ReadonlyArray<string>) {
   const statsJson = await Util.readFile(
-    path.join(__dirname, `../out/stats-${statName}.json`),
+    path.join(import.meta.dirname, `../out/stats-${statName}.json`),
     {encoding: 'utf8'}
   );
   const stats = (JSON.parse(statsJson) as BenchmarkGroup[]);
@@ -33,11 +33,13 @@ async function writeChartData(stats: BenchmarkGroup[], statName: string, targetN
     index++;
   }
 
-  await Util.makeDirectoryIfNotExists(path.join(__dirname, `../../overleaf-ramp/stats`));
+  await Util.makeDirectoryIfNotExists(
+    path.join(import.meta.dirname, `../out/latex/stats`)
+  );
   await Util.writeFile(
     path.join(
-      __dirname,
-      `../../overleaf-ramp/stats`,
+      import.meta.dirname,
+      `../out/latex/stats`,
       `${statName}-${targetName}.dat`
     ),
     data,

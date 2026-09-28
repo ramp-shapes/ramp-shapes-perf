@@ -1,18 +1,33 @@
-import * as path from 'path';
-import { performance } from 'perf_hooks';
+import * as path from 'node:path';
+import { performance } from 'node:perf_hooks';
 import * as Ramp from 'ramp-shapes';
 
-import * as JsonLd from './jsonld';
-import * as Util from './util';
-import { BenchmarkGroup, runBenchmark } from './benchmark';
+import * as JsonLd from './jsonld.js';
+import {
+  readJson, readShapes, readFile, readdir, toJson, makeDirectoryIfNotExists,
+  writeFile, writeQuadsToTurtle,
+} from './util.js';
+import { BenchmarkGroup, runBenchmark } from './benchmark.js';
 
-const JSONLD_IIIF_PRESENTATION_CONTEXT_V1 = require('../datasets/iiif-schema/presentation-context-v1.json');
-const JSONLD_IIIF_PRESENTATION_CONTEXT_V2 = require('../datasets/iiif-schema/presentation-context-v2.json');
-const JSONLD_IIIF_IMAGE_CONTEXT_V1 = require('../datasets/iiif-schema/image-context-v1.json');
-const JSONLD_IIIF_IMAGE_CONTEXT_V2 = require('../datasets/iiif-schema/image-context-v2.json');
-const JSONLD_IIIF_FRAME = require('../datasets/iiif-schema/manifest-frame.json');
+const JSONLD_IIIF_PRESENTATION_CONTEXT_V1 = readJson(
+  path.join(import.meta.dirname, '../datasets/iiif-schema/presentation-context-v1.json')
+) as object;
+const JSONLD_IIIF_PRESENTATION_CONTEXT_V2 = readJson(
+  path.join(import.meta.dirname, '../datasets/iiif-schema/presentation-context-v2.json')
+) as object;
+const JSONLD_IIIF_IMAGE_CONTEXT_V1 = readJson(
+  path.join(import.meta.dirname, '../datasets/iiif-schema/image-context-v1.json')
+) as object;
+const JSONLD_IIIF_IMAGE_CONTEXT_V2 = readJson(
+  path.join(import.meta.dirname, '../datasets/iiif-schema/image-context-v2.json')
+) as object;
+const JSONLD_IIIF_FRAME = readJson(
+  path.join(import.meta.dirname, '../datasets/iiif-schema/manifest-frame.json')
+) as object;
 
-const SHAPES = Util.readShapes(path.join(__dirname, '../datasets/iiif-schema/manifest-shapes.ttl'));
+const SHAPES = readShapes(
+  path.join(import.meta.dirname, '../datasets/iiif-schema/manifest-shapes.ttl')
+);
 const MANIFEST_SHAPE_ID = Ramp.Rdf.DefaultDataFactory.namedNode('http://iiif.io/api/presentation/2#Manifest');
 const MANIFEST_SHAPE = SHAPES.find(s => Ramp.Rdf.equalTerms(s.id, MANIFEST_SHAPE_ID))!;
 
@@ -58,14 +73,14 @@ interface BenchmarkedManifest {
 async function main() {
   const manifests: BenchmarkedManifest[] = [];
 
-  const manifestDir = path.join(__dirname, '../datasets/iiif');
-  for (const fileName of await Util.readdir(manifestDir)) {
+  const manifestDir = path.join(import.meta.dirname, '../datasets/iiif');
+  for (const fileName of await readdir(manifestDir)) {
     if (!fileName.endsWith('.json')) { continue; }
     const manifestName = fileName.substring(0, fileName.length - '.json'.length);
     let manifest: BenchmarkedManifest;
     try {
       const manifestPath = path.join(manifestDir, fileName);
-      const jsonldDocument = JSON.parse(await Util.readFile(manifestPath, {encoding: 'utf8'}));
+      const jsonldDocument = JSON.parse(await readFile(manifestPath, {encoding: 'utf8'}));
       const jsonldFlatten = await JsonLd.flatten(
         jsonldDocument,
         'http://iiif.io/api/presentation/2/context.json',
@@ -102,12 +117,12 @@ async function main() {
 }
 
 async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
-  const outDir = path.join(__dirname, '../out');
-  await Util.makeDirectoryIfNotExists(outDir);
-  await Util.makeDirectoryIfNotExists(path.join(outDir, 'frame-ramp'));
-  await Util.makeDirectoryIfNotExists(path.join(outDir, 'frame-jsonld'));
-  await Util.makeDirectoryIfNotExists(path.join(outDir, 'flatten-ramp'));
-  await Util.makeDirectoryIfNotExists(path.join(outDir, 'flatten-jsonld'));
+  const outDir = path.join(import.meta.dirname, '../out');
+  await makeDirectoryIfNotExists(outDir);
+  await makeDirectoryIfNotExists(path.join(outDir, 'frame-ramp'));
+  await makeDirectoryIfNotExists(path.join(outDir, 'frame-jsonld'));
+  await makeDirectoryIfNotExists(path.join(outDir, 'flatten-ramp'));
+  await makeDirectoryIfNotExists(path.join(outDir, 'flatten-jsonld'));
 
   for (const manifest of manifests) {
     console.log('Testing manifest: ', manifest.manifestName, `(${manifest.quads.length} quads)`);
@@ -125,10 +140,10 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
         manifest.rampFramed = value as object;
         // console.log('[ramp] framed:', toJson(value));
         console.log(`[ramp] frame OK in ${Math.round(endRamTime - startRamTime)} ms`);
-        const json = Util.toJson(value);
+        const json = toJson(value);
 
-        await Util.writeFile(
-          path.join(__dirname, '../out/frame-ramp', `${manifest.manifestName}.json`),
+        await writeFile(
+          path.join(import.meta.dirname, '../out/frame-ramp', `${manifest.manifestName}.json`),
           json,
           {encoding: 'utf8'}
         );
@@ -154,8 +169,8 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
       );
 
       const json = JSON.stringify(manifest.jsonldFramed, null, 2);
-      await Util.writeFile(
-        path.join(__dirname, '../out/frame-jsonld', `${manifest.manifestName}.json`),
+      await writeFile(
+        path.join(import.meta.dirname, '../out/frame-jsonld', `${manifest.manifestName}.json`),
         json,
         {encoding: 'utf8'}
       );
@@ -166,8 +181,8 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
     try {
       const quads = Array.from(Ramp.flatten({shape: MANIFEST_SHAPE, value: manifest.rampFramed}));
       manifest.rampFlattenQuadCount = quads.length;
-      await Util.writeQuadsToTurtle(
-        path.join(__dirname, '../out/flatten-ramp', `${manifest.manifestName}.ttl`),
+      await writeQuadsToTurtle(
+        path.join(import.meta.dirname, '../out/flatten-ramp', `${manifest.manifestName}.ttl`),
         quads,
         PREFIXES
       );
@@ -185,8 +200,8 @@ async function writeTestResults(manifests: ReadonlyArray<BenchmarkedManifest>) {
       const quads = (await JsonLd.toRdf(flatDocument, {documentLoader: DOCUMENT_LOADER}))
         .map(JsonLd.mapJsonLdQuad);
       manifest.jsonldFlattenQuadCount = quads.length;
-      await Util.writeQuadsToTurtle(
-        path.join(__dirname, '../out/flatten-jsonld', `${manifest.manifestName}.ttl`),
+      await writeQuadsToTurtle(
+        path.join(import.meta.dirname, '../out/flatten-jsonld', `${manifest.manifestName}.ttl`),
         quads,
         PREFIXES
       );
@@ -276,10 +291,10 @@ async function benchmarkFlatten(manifests: ReadonlyArray<BenchmarkedManifest>) {
 }
 
 async function writeBenchmarkStats(statsName: string, stats: BenchmarkGroup[]) {
-  await Util.makeDirectoryIfNotExists(path.join(__dirname, '../out'));
+  await makeDirectoryIfNotExists(path.join(import.meta.dirname, '../out'));
   const statsJson = JSON.stringify(stats, null, 2);
-  await Util.writeFile(
-    path.join(__dirname, `../out/stats-${statsName}.json`),
+  await writeFile(
+    path.join(import.meta.dirname, `../out/stats-${statsName}.json`),
     statsJson,
     {encoding: 'utf8'}
   );

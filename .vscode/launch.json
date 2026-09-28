@@ -8,8 +8,8 @@
         "type": "node",
         "request": "launch",
         "name": "Launch Program",
+        "runtimeExecutable": "tsx",
         "args": ["${relativeFile}"],
-        "runtimeArgs": ["--nolazy", "-r", "ts-node/register"]
       }
     ]
 }

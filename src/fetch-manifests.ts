@@ -1,7 +1,7 @@
-import * as fs from 'fs';
-import * as http from 'http';
-import * as https from 'https';
-import * as path from 'path';
+import * as fs from 'node:fs';
+import * as http from 'node:http';
+import * as https from 'node:https';
+import * as path from 'node:path';
 
 // adopted from Mirador project example
 const manifests = [
@@ -95,7 +95,7 @@ async function downloadAll() {
     const task = downloadFile(
       manifest.manifestUri,
       path.join(
-        __dirname,
+        import.meta.dirname,
         '../datasets/iiif',
         `${tasks.length.toString().padStart(2, '0')}_${manifest.location}.json`
       )

@@ -1,18 +1,21 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "es2023",
     "lib": ["es2018"],
-    "module": "commonjs",
-    "outDir": "./dist",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "isolatedModules": true,
     "strict": true,
-    "importHelpers": true,
+    "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
     "sourceMap": true,
-    "typeRoots": [
-      "./types"
-    ]
+    // TODO: remove after update to latest ramp-shapes
+    "skipLibCheck": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "types/**/*",
   ]
 }
